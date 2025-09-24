@@ -3,12 +3,10 @@ import 'package:fiap_farms/utils/result.dart';
 
 abstract class AuthService {
   Future<Result<UserCredential>> login(String email, String password);
-
   Future<Result<void>> logout();
-
   Future<Result<UserCredential>> createUser(String email, String password);
-
   Future<Result<User?>> getCurrentUser();
+  Stream<User?> authStateChanges();
 }
 
 class AuthServiceImpl implements AuthService {
@@ -55,5 +53,10 @@ class AuthServiceImpl implements AuthService {
     } on Exception catch (error) {
       return Result.error(error);
     }
+  }
+
+  @override
+  Stream<User?> authStateChanges() {
+    return FirebaseAuth.instance.authStateChanges();
   }
 }
