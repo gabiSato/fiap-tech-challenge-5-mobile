@@ -71,4 +71,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'fiap-farms-3e501.firebasestorage.app',
     iosBundleId: 'com.example.fiapFarms',
   );
+
 }
