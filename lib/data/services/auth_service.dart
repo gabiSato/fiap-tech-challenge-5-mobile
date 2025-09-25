@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiap_farms/utils/result.dart';
 
+// TODO: Criar as classes de modelos
+// TODO: Passar classe abstrata para a camada de domínio
 abstract class AuthService {
   Future<Result<UserCredential>> login(String email, String password);
   Future<Result<void>> logout();
