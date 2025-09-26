@@ -375,6 +375,16 @@ class MaterialTheme {
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         foregroundColor: colorScheme.primary,
+        textStyle: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+      ),
+    ),
+
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        side: BorderSide(color: colorScheme.outline),
+        textStyle: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
+        padding: EdgeInsets.symmetric(vertical: 14),
       ),
     ),
 
@@ -383,6 +393,8 @@ class MaterialTheme {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         foregroundColor: colorScheme.primary,
         side: BorderSide(color: colorScheme.outline),
+        textStyle: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
+        padding: EdgeInsets.symmetric(vertical: 14),
       ),
     ),
 

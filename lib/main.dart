@@ -1,3 +1,4 @@
+import 'package:fiap_farms/ui/auth/login/widgets/login_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiap_farms/ui/core/themes/theme.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: theme.light(),
       darkTheme: theme.dark(),
       themeMode: ThemeMode.system,
-      home: Scaffold(),
+      home: LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
