@@ -353,6 +353,9 @@ class MaterialTheme {
       scrolledUnderElevation: 0,
       backgroundColor: colorScheme.surface,
       foregroundColor: colorScheme.onSurface,
+      titleTextStyle: textTheme.titleLarge?.copyWith(
+        fontWeight: FontWeight.w600,
+      ),
     ),
 
     cardTheme: CardThemeData(
