@@ -26,7 +26,7 @@ class MaterialTheme {
       onError: Color(0xffffffff),
       errorContainer: Color(0xffffdad6),
       onErrorContainer: Color(0xff93000a),
-      surface: Color(0xfffcf8f8),
+      surface: Color(0xffffffff),
       onSurface: Color(0xff1c1b1b),
       onSurfaceVariant: Color(0xff444748),
       outline: Color(0xff747878),
@@ -406,14 +406,11 @@ class MaterialTheme {
       fillColor: colorScheme.surfaceContainerHighest.withOpacity(0.5),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.0),
-        borderSide: BorderSide.none, // Sem borda no estado padrão
+        borderSide: BorderSide.none,
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.0),
-        borderSide: BorderSide(
-          color: colorScheme.primary,
-          width: 2.0,
-        ), // Destaque ao focar
+        borderSide: BorderSide(color: colorScheme.primary, width: 2.0),
       ),
       contentPadding: const EdgeInsets.symmetric(
         vertical: 16.0,
@@ -433,27 +430,30 @@ class MaterialTheme {
           borderRadius: BorderRadius.circular(12.0),
           borderSide: BorderSide(color: colorScheme.primary, width: 2.0),
         ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 16.0,
+          horizontal: 20.0,
+        ),
       ),
       menuStyle: MenuStyle(
-        backgroundColor: MaterialStateProperty.all(colorScheme.surface),
-        elevation: MaterialStateProperty.all(3.0),
-        shape: MaterialStateProperty.all(
+        backgroundColor: WidgetStateProperty.all(colorScheme.surface),
+        elevation: WidgetStateProperty.all(3.0),
+        shape: WidgetStateProperty.all(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
         ),
-        padding: MaterialStateProperty.all(const EdgeInsets.all(8.0)),
+        padding: WidgetStateProperty.all(const EdgeInsets.all(8.0)),
       ),
     ),
 
     checkboxTheme: CheckboxThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
-      fillColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+      fillColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
           return colorScheme.primary;
         }
         return colorScheme.onSurface.withOpacity(0.6);
       }),
-      checkColor: MaterialStateProperty.all(colorScheme.onPrimary),
+      checkColor: WidgetStateProperty.all(colorScheme.onPrimary),
     ),
   );
 
