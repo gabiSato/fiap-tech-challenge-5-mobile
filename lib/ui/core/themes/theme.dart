@@ -420,9 +420,43 @@ class MaterialTheme {
         horizontal: 20.0,
       ),
     ),
+
+    dropdownMenuTheme: DropdownMenuThemeData(
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: colorScheme.surfaceVariant.withOpacity(0.5),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.0),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.0),
+          borderSide: BorderSide(color: colorScheme.primary, width: 2.0),
+        ),
+        contentPadding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+      ),
+      menuStyle: MenuStyle(
+        backgroundColor: MaterialStateProperty.all(colorScheme.surface),
+        elevation: MaterialStateProperty.all(3.0),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+        ),
+        padding: MaterialStateProperty.all(const EdgeInsets.all(8.0)),
+      ),
+    ),
+
+    checkboxTheme: CheckboxThemeData(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+      fillColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return colorScheme.primary;
+        }
+        return colorScheme.onSurface.withOpacity(0.6);
+      }),
+      checkColor: MaterialStateProperty.all(colorScheme.onPrimary),
+    ),
   );
 
-  /// Custom Color 1
   static const customColor1 = ExtendedColor(
     seed: Color(0xff222222),
     value: Color(0xff222222),
