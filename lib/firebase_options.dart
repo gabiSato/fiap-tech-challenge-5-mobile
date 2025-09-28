@@ -28,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macOS - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -47,29 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBWyPWtFBoCrXCHcMTUkZaic_FICLRvKnc',
-    appId: '1:916780746601:android:7fc6f5d6b9788258c19ff8',
-    messagingSenderId: '916780746601',
-    projectId: 'fiap-farms-3e501',
-    storageBucket: 'fiap-farms-3e501.firebasestorage.app',
+    apiKey: 'AIzaSyCk9vL6yZ5qpB3hhZgqfaCx52xB4aDgOv4',
+    appId: '1:382838088139:android:13d8997bb938be7ab2d64e',
+    messagingSenderId: '382838088139',
+    projectId: 'tech-challenge-bytebank',
+    storageBucket: 'tech-challenge-bytebank.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCwa9pVs_508qIDpXp8Ocnp5ejawfDNeXY',
-    appId: '1:916780746601:ios:abb52bf2e9c8a7dfc19ff8',
-    messagingSenderId: '916780746601',
-    projectId: 'fiap-farms-3e501',
-    storageBucket: 'fiap-farms-3e501.firebasestorage.app',
+    apiKey: 'AIzaSyBbtCInoxfUXVJVud0XCexTS8Og28VfWxM',
+    appId: '1:382838088139:ios:da6650e38dc8b1b3b2d64e',
+    messagingSenderId: '382838088139',
+    projectId: 'tech-challenge-bytebank',
+    storageBucket: 'tech-challenge-bytebank.firebasestorage.app',
     iosBundleId: 'com.example.fiapFarms',
   );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCwa9pVs_508qIDpXp8Ocnp5ejawfDNeXY',
-    appId: '1:916780746601:ios:abb52bf2e9c8a7dfc19ff8',
-    messagingSenderId: '916780746601',
-    projectId: 'fiap-farms-3e501',
-    storageBucket: 'fiap-farms-3e501.firebasestorage.app',
-    iosBundleId: 'com.example.fiapFarms',
-  );
-
 }
