@@ -6,7 +6,10 @@ import 'package:fiap_farms/utils/result.dart';
 abstract class AuthService {
   Future<Result<UserCredential>> login(String email, String password);
   Future<Result<void>> logout();
-  Future<Result<UserCredential>> createUser(String email, String password);
+  Future<Result<UserCredential>> createCredential(
+    String email,
+    String password,
+  );
   Future<Result<User?>> getCurrentUser();
   Stream<User?> authStateChanges();
 }
@@ -34,7 +37,7 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
-  Future<Result<UserCredential>> createUser(
+  Future<Result<UserCredential>> createCredential(
     String email,
     String password,
   ) async {
