@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:fiap_farms/data/model/product_analytic.dart';
+import 'package:fiap_farms/data/models/product_analytic_model.dart';
 import 'package:fiap_farms/utils/result.dart';
 
 abstract class ProductAnalytic {
