@@ -6,7 +6,6 @@ class SaleModel {
   final String productId;
   final DateTime? saleDate;
   final String clientName;
-  final String productName;
   final int quantity;
   final String unitOfMeasure;
   final double costPrice;
@@ -20,7 +19,6 @@ class SaleModel {
     required this.productId,
     this.saleDate,
     required this.clientName,
-    required this.productName,
     required this.quantity,
     required this.unitOfMeasure,
     required this.costPrice,
@@ -38,7 +36,6 @@ class SaleModel {
           ? (map['saleDate'] as Timestamp).toDate()
           : null,
       clientName: map['clientName'] ?? '',
-      productName: map['productName'] ?? '',
       quantity: map['quantity'] ?? 0,
       unitOfMeasure: map['unitOfMeasure'] ?? '',
       costPrice: (map['costPrice'] ?? 0).toDouble(),
@@ -54,7 +51,6 @@ class SaleModel {
       'productId': productId,
       'saleDate': saleDate,
       'clientName': clientName,
-      'productName': productName,
       'quantity': quantity,
       'unitOfMeasure': unitOfMeasure,
       'costPrice': costPrice,

@@ -3,11 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class GoalModel {
   final String? id;
   final String userId;
-  final String productId;
+  final String? productId;
   final String type;
   final String description;
-  final num targetValue;
-  final num currentValue;
+  final double targetValue;
+  final double currentValue;
   final DateTime? startDate;
   final DateTime? endDate;
   final String status;
@@ -29,7 +29,7 @@ class GoalModel {
     return GoalModel(
       id: id,
       userId: map['userId'] ?? '',
-      productId: map['productId'] ?? '',
+      productId: map['productId'],
       type: map['type'] ?? '',
       description: map['description'] ?? '',
       targetValue: map['targetValue'] ?? 0,
