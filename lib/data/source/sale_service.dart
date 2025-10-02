@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fiap_farms/data/model/sale_model.dart';
 
+import 'package:fiap_farms/data/model/sale_model.dart';
 import 'package:fiap_farms/utils/result.dart';
 
 abstract class SaleService {

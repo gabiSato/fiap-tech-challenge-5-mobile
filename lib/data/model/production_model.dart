@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductionModel {
-  final String id;
+  final String? id;
   final String userId;
   final String productId;
   final String status;
