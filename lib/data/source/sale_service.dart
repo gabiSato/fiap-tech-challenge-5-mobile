@@ -1,86 +1,86 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiap_farms/data/model/sale_model.dart';
+
+import 'package:fiap_farms/utils/result.dart';
 
 abstract class SaleService {
-  Future<void> getSale(String saleId);
-  Future<void> createSale();
-  Future<void> updateSale(String saleId);
-  Future<void> deleteSale(String saleId);
-  Future<void> getAllSales(String userId);
+  Future<Result<SaleModel>> getSale(String saleId);
+  Future<Result<void>> createSale(SaleModel sale);
+  Future<Result<void>> updateSale(SaleModel sale);
+  Future<Result<void>> deleteSale(String saleId);
+  Future<Result<List<SaleModel>>> getAllSales(String userId);
 }
 
 class SaleServiceImpl implements SaleService {
   @override
-  Future<void> getSale(String saleId) async {
+  Future<Result<SaleModel>> getSale(String saleId) async {
     try {
-      DocumentSnapshot doc = await FirebaseFirestore.instance
+      final saleDoc = await FirebaseFirestore.instance
           .collection('sales')
           .doc(saleId)
           .get();
+
+      if (!saleDoc.exists) {
+        return Result.error(Exception('Sale not found'));
+      }
+
+      return Result.ok(SaleModel.fromMap(saleDoc.data()!, saleDoc.id));
     } on Exception catch (error) {
-      print(error);
+      return Result.error(error);
     }
   }
 
   @override
-  Future<void> createSale() async {
+  Future<Result<void>> createSale(SaleModel sale) async {
     try {
-      await FirebaseFirestore.instance.collection('sales').add({
-        "userId": '',
-        "productId": '',
-        "saleDate": null,
-        "clientName": '',
-        "productName": '',
-        "quantity": 0,
-        "unitOfMeasure": '',
-        "costPrice": 0,
-        "unitPrice": 0,
-        "totalAmount": 0,
-        "totalProfit": 0,
-      });
+      await FirebaseFirestore.instance.collection('sales').add(sale.toMap());
+
+      return Result.ok(null);
     } on Exception catch (error) {
-      print(error);
+      return Result.error(error);
     }
   }
 
   @override
-  Future<void> updateSale(String saleId) async {
+  Future<Result<void>> updateSale(SaleModel sale) async {
     try {
-      await FirebaseFirestore.instance.collection('sales').doc(saleId).update({
-        "productId": '',
-        "saleDate": null,
-        "clientName": '',
-        "productName": '',
-        "quantity": 0,
-        "unitOfMeasure": '',
-        "costPrice": 0,
-        "unitPrice": 0,
-        "totalAmount": 0,
-        "totalProfit": 0,
-      });
+      await FirebaseFirestore.instance
+          .collection('sales')
+          .doc(sale.id)
+          .update(sale.toMap());
+
+      return Result.ok(null);
     } on Exception catch (error) {
-      print(error);
+      return Result.error(error);
     }
   }
 
   @override
-  Future<void> deleteSale(String saleId) async {
+  Future<Result<void>> deleteSale(String saleId) async {
     try {
       await FirebaseFirestore.instance.collection('sales').doc(saleId).delete();
+
+      return Result.ok(null);
     } on Exception catch (error) {
-      print(error);
+      return Result.error(error);
     }
   }
 
   @override
-  Future<void> getAllSales(String userId) async {
+  Future<Result<List<SaleModel>>> getAllSales(String userId) async {
     try {
-      QuerySnapshot<Map<String, dynamic>> querySnapshot =
-          await FirebaseFirestore.instance
-              .collection('sales')
-              .where('userId', isEqualTo: userId)
-              .get();
+      final saleDocs = await FirebaseFirestore.instance
+          .collection('sales')
+          .where('userId', isEqualTo: userId)
+          .get();
+
+      List<SaleModel> sales = saleDocs.docs
+          .map((doc) => SaleModel.fromMap(doc.data(), doc.id))
+          .toList();
+
+      return Result.ok(sales);
     } on Exception catch (error) {
-      print(error);
+      return Result.error(error);
     }
   }
 }
