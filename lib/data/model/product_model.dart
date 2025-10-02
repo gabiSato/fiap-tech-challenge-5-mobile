@@ -13,13 +13,13 @@ class ProductModel {
     required this.quantity,
   });
 
-  factory ProductModel.fromMap(Map<String, dynamic> data, String documentId) {
+  factory ProductModel.fromMap(Map<String, dynamic> map, String id) {
     return ProductModel(
-      id: documentId,
-      userId: data['userId'] ?? '',
-      name: data['name'] ?? '',
-      unitOfMeasure: data['unitOfMeasure'] ?? '',
-      quantity: (data['quantity'] ?? 0).toDouble(),
+      id: id,
+      userId: map['userId'] ?? '',
+      name: map['name'] ?? '',
+      unitOfMeasure: map['unitOfMeasure'] ?? '',
+      quantity: (map['quantity'] ?? 0).toDouble(),
     );
   }
 
