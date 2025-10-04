@@ -2,9 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fiap_farms/ui/home/widgets/home_screen.dart';
 import 'package:fiap_farms/ui/core/themes/theme.dart';
 import 'package:fiap_farms/ui/core/themes/texts.dart';
+import 'package:fiap_farms/routing/router.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -13,24 +13,24 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseAuth.instanceFor(app: Firebase.app());
 
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = createTextTheme(context, "Lato", "Lato");
     MaterialTheme theme = MaterialTheme(textTheme);
 
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Farms',
       theme: theme.light(),
       darkTheme: theme.dark(),
       themeMode: ThemeMode.system,
-      home: HomeScreen(),
       debugShowCheckedModeBanner: false,
+      routerConfig: router(),
     );
   }
 }
