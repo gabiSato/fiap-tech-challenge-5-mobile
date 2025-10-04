@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:fiap_farms/routing/routes.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -47,7 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Não tem uma conta?'),
-                    TextButton(onPressed: () {}, child: Text('Cadastre-se')),
+                    TextButton(
+                      onPressed: () => context.go(Routes.userRegistration),
+                      child: Text('Cadastre-se'),
+                    ),
                   ],
                 ),
               ],
