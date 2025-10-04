@@ -18,6 +18,14 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const TextField(
+                decoration: InputDecoration(labelText: 'Nome completo'),
+              ),
+              const SizedBox(height: 24),
+              const TextField(
+                decoration: InputDecoration(labelText: 'Nome da fazenda'),
+              ),
+              const SizedBox(height: 24),
               const TextField(decoration: InputDecoration(labelText: 'E-mail')),
               const SizedBox(height: 24),
               const TextField(
