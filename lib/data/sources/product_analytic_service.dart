@@ -4,7 +4,7 @@ import 'package:fiap_farms/data/models/product_analytic_model.dart';
 import 'package:fiap_farms/utils/firestore_collentions.dart';
 import 'package:fiap_farms/utils/result.dart';
 
-abstract class ProductAnalytic {
+abstract class ProductAnalyticService {
   Future<Result<void>> createProductAnalytic(
     ProductAnalyticModel productAnalytic,
   );
@@ -16,7 +16,7 @@ abstract class ProductAnalytic {
   );
 }
 
-class ProductAnalyticServiceImpl implements ProductAnalytic {
+class ProductAnalyticServiceImpl implements ProductAnalyticService {
   final FirebaseFirestore _firestore;
 
   ProductAnalyticServiceImpl({FirebaseFirestore? firestore})
