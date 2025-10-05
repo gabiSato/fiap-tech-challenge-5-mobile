@@ -1,3 +1,5 @@
+import 'package:fiap_farms/domain/entities/product_entity.dart';
+
 class ProductModel {
   final String? id;
   final String userId;
@@ -6,7 +8,7 @@ class ProductModel {
   final double quantity;
 
   ProductModel({
-    required this.id,
+    this.id,
     required this.userId,
     required this.name,
     required this.unitOfMeasure,
@@ -30,5 +32,25 @@ class ProductModel {
       'unitOfMeasure': unitOfMeasure,
       'quantity': quantity,
     };
+  }
+
+  factory ProductModel.fromEntity(ProductEntity entity) {
+    return ProductModel(
+      id: entity.id,
+      userId: entity.userId,
+      name: entity.name,
+      unitOfMeasure: entity.unitOfMeasure,
+      quantity: entity.quantity,
+    );
+  }
+
+  ProductEntity toEntity() {
+    return ProductEntity(
+      id: id,
+      userId: userId,
+      name: name,
+      unitOfMeasure: unitOfMeasure,
+      quantity: quantity,
+    );
   }
 }

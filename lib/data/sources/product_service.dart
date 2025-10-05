@@ -4,7 +4,7 @@ import 'package:fiap_farms/data/models/product_model.dart';
 import 'package:fiap_farms/utils/result.dart';
 
 abstract class ProductService {
-  Future<Result<ProductModel>> getProduct(String prodcutId);
+  Future<Result<ProductModel>> getProduct(String productId);
   Future<Result<void>> createProduct(ProductModel product);
   Future<Result<void>> updateProduct(ProductModel product);
   Future<Result<void>> updateProductQuantity(
@@ -16,11 +16,11 @@ abstract class ProductService {
 
 class ProductServiceImpl implements ProductService {
   @override
-  Future<Result<ProductModel>> getProduct(String prodcutId) async {
+  Future<Result<ProductModel>> getProduct(String productId) async {
     try {
       final productDoc = await FirebaseFirestore.instance
           .collection('products')
-          .doc(prodcutId)
+          .doc(productId)
           .get();
 
       if (!productDoc.exists) {
