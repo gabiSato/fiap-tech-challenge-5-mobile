@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:fiap_farms/domain/entities/production_entity.dart';
+
 class ProductionModel {
   final String? id;
   final String userId;
   final String productId;
   final String status;
-  final int quantityPlanted;
-  final int? quantityHarvested;
-  final DateTime? startDate;
+  final double quantityPlanted;
+  final DateTime startDate;
+  final double? quantityHarvested;
   final DateTime? harvestDate;
 
   ProductionModel({
@@ -16,8 +18,8 @@ class ProductionModel {
     required this.productId,
     required this.status,
     required this.quantityPlanted,
-    required this.quantityHarvested,
-    this.startDate,
+    required this.startDate,
+    this.quantityHarvested,
     this.harvestDate,
   });
 
@@ -29,9 +31,7 @@ class ProductionModel {
       status: map['status'] ?? '',
       quantityPlanted: map['quantityPlanted'] ?? 0,
       quantityHarvested: map['quantityHarvested'] ?? 0,
-      startDate: map['startDate'] != null
-          ? (map['startDate'] as Timestamp).toDate()
-          : null,
+      startDate: (map['startDate'] as Timestamp).toDate(),
       harvestDate: map['harvestDate'] != null
           ? (map['harvestDate'] as Timestamp).toDate()
           : null,
@@ -48,5 +48,31 @@ class ProductionModel {
       'startDate': startDate,
       'harvestDate': harvestDate,
     };
+  }
+
+  factory ProductionModel.fromEntity(ProductionEntity entity) {
+    return ProductionModel(
+      id: entity.id,
+      userId: entity.userId,
+      productId: entity.productId,
+      status: entity.status,
+      quantityPlanted: entity.quantityPlanted,
+      quantityHarvested: entity.quantityHarvested,
+      startDate: entity.startDate,
+      harvestDate: entity.harvestDate,
+    );
+  }
+
+  ProductionEntity toEntity() {
+    return ProductionEntity(
+      id: id,
+      userId: userId,
+      productId: productId,
+      status: status,
+      quantityPlanted: quantityPlanted,
+      quantityHarvested: quantityHarvested,
+      startDate: startDate,
+      harvestDate: harvestDate,
+    );
   }
 }
