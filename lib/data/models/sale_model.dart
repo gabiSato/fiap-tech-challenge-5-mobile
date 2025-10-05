@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:fiap_farms/domain/entities/sale_entity.dart';
+
 class SaleModel {
   final String? id;
   final String userId;
   final String productId;
-  final DateTime? saleDate;
+  final DateTime saleDate;
   final String clientName;
   final int quantity;
   final String unitOfMeasure;
@@ -14,10 +16,10 @@ class SaleModel {
   final double totalProfit;
 
   SaleModel({
-    required this.id,
+    this.id,
     required this.userId,
     required this.productId,
-    this.saleDate,
+    required this.saleDate,
     required this.clientName,
     required this.quantity,
     required this.unitOfMeasure,
@@ -32,9 +34,7 @@ class SaleModel {
       id: id,
       userId: map['userId'] ?? '',
       productId: map['productId'] ?? '',
-      saleDate: map['saleDate'] != null
-          ? (map['saleDate'] as Timestamp).toDate()
-          : null,
+      saleDate: (map['saleDate'] as Timestamp).toDate(),
       clientName: map['clientName'] ?? '',
       quantity: map['quantity'] ?? 0,
       unitOfMeasure: map['unitOfMeasure'] ?? '',
@@ -58,5 +58,37 @@ class SaleModel {
       'totalAmount': totalAmount,
       'totalProfit': totalProfit,
     };
+  }
+
+  SaleEnity toEntity() {
+    return SaleEnity(
+      id: id,
+      userId: userId,
+      productId: productId,
+      saleDate: saleDate,
+      clientName: clientName,
+      quantity: quantity,
+      unitOfMeasure: unitOfMeasure,
+      costPrice: costPrice,
+      unitPrice: unitPrice,
+      totalAmount: totalAmount,
+      totalProfit: totalProfit,
+    );
+  }
+
+  factory SaleModel.fromEntity(SaleEnity sale) {
+    return SaleModel(
+      id: sale.id,
+      userId: sale.userId,
+      productId: sale.productId,
+      saleDate: sale.saleDate,
+      clientName: sale.clientName,
+      quantity: sale.quantity,
+      unitOfMeasure: sale.unitOfMeasure,
+      costPrice: sale.costPrice,
+      unitPrice: sale.unitPrice,
+      totalAmount: sale.totalAmount,
+      totalProfit: sale.totalProfit,
+    );
   }
 }

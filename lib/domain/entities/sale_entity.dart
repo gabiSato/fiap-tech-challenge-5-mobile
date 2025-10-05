@@ -1,4 +1,4 @@
-class Sale {
+class SaleEnity {
   final String? id;
   final String userId;
   final String productId;
@@ -11,7 +11,7 @@ class Sale {
   final double totalAmount;
   final double totalProfit;
 
-  Sale({
+  SaleEnity({
     this.id,
     required this.userId,
     required this.productId,
