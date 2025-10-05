@@ -1,13 +1,13 @@
-class ProductAnalytic {
+class ProductAnalyticEntity {
   final String userId;
   final String productId;
   final String productName;
-  final int totalSoldQuantity;
+  final double totalSoldQuantity;
   final double totalRevenue;
   final double totalProfit;
   final DateTime lastSaleDate;
 
-  ProductAnalytic({
+  ProductAnalyticEntity({
     required this.userId,
     required this.productId,
     required this.productName,

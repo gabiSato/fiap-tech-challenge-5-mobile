@@ -80,8 +80,8 @@ class GoalModel {
       description: description,
       targetValue: targetValue,
       currentValue: currentValue,
-      startDate: startDate!,
-      endDate: endDate!,
+      startDate: startDate,
+      endDate: endDate,
       status: status,
     );
   }
