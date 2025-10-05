@@ -1,13 +1,13 @@
-import 'package:fiap_farms/domain/entities/location.dart';
+import 'package:fiap_farms/domain/entities/location_entity.dart';
 
-class User {
+class UserEntity {
   final String? id;
   final String farmName;
   final String ownerName;
   final String email;
-  final Location? location;
+  final LocationEntity? location;
 
-  User({
+  UserEntity({
     this.id,
     required this.farmName,
     required this.ownerName,
