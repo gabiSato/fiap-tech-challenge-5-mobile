@@ -10,7 +10,7 @@ abstract class AuthService {
     String password,
   );
   Future<Result<User?>> getCurrentUser();
-  Stream<User?> authStateChanges();
+  Stream<String?> authStateChanges();
 }
 
 class AuthServiceImpl implements AuthService {
@@ -66,7 +66,7 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
-  Stream<User?> authStateChanges() {
-    return _auth.authStateChanges();
+  Stream<String?> authStateChanges() {
+    return _auth.authStateChanges().map((user) => user?.uid);
   }
 }

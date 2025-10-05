@@ -14,4 +14,20 @@ class UserEntity {
     required this.email,
     this.location,
   });
+
+  UserEntity copyWith({
+    String? id,
+    String? farmName,
+    String? ownerName,
+    String? email,
+    LocationEntity? location,
+  }) {
+    return UserEntity(
+      id: id ?? this.id,
+      farmName: farmName ?? this.farmName,
+      ownerName: ownerName ?? this.ownerName,
+      email: email ?? this.email,
+      location: location ?? this.location,
+    );
+  }
 }
