@@ -12,7 +12,7 @@ class SaleRepositoryImpl implements SaleRepository {
   SaleRepositoryImpl(this._saleService);
 
   @override
-  Future<Result<SaleEnity>> getSale(String saleId) async {
+  Future<Result<SaleEntity>> getSale(String saleId) async {
     final result = await _saleService.getSale(saleId);
 
     return switch (result) {
@@ -22,13 +22,13 @@ class SaleRepositoryImpl implements SaleRepository {
   }
 
   @override
-  Future<Result<void>> createSale(SaleEnity sale) async {
+  Future<Result<void>> createSale(SaleEntity sale) async {
     final saleModel = SaleModel.fromEntity(sale);
     return _saleService.createSale(saleModel);
   }
 
   @override
-  Future<Result<void>> updateSale(SaleEnity sale) async {
+  Future<Result<void>> updateSale(SaleEntity sale) async {
     final saleModel = SaleModel.fromEntity(sale);
     return _saleService.updateSale(saleModel);
   }
@@ -39,7 +39,7 @@ class SaleRepositoryImpl implements SaleRepository {
   }
 
   @override
-  Future<Result<List<SaleEnity>>> getAllSales(String userId) async {
+  Future<Result<List<SaleEntity>>> getAllSales(String userId) async {
     final result = await _saleService.getAllSales(userId);
     return switch (result) {
       Ok(value: final productionModels) => Result.ok(

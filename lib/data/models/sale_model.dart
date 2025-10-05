@@ -60,8 +60,8 @@ class SaleModel {
     };
   }
 
-  SaleEnity toEntity() {
-    return SaleEnity(
+  SaleEntity toEntity() {
+    return SaleEntity(
       id: id,
       userId: userId,
       productId: productId,
@@ -76,7 +76,7 @@ class SaleModel {
     );
   }
 
-  factory SaleModel.fromEntity(SaleEnity sale) {
+  factory SaleModel.fromEntity(SaleEntity sale) {
     return SaleModel(
       id: sale.id,
       userId: sale.userId,
