@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:fiap_farms/utils/result.dart';
 
-// TODO: Criar as classes de modelos
-// TODO: Passar classe abstrata para a camada de domínio
 abstract class AuthService {
   Future<Result<UserCredential>> login(String email, String password);
   Future<Result<void>> logout();
@@ -15,11 +14,17 @@ abstract class AuthService {
 }
 
 class AuthServiceImpl implements AuthService {
+  final FirebaseAuth _auth;
+
+  AuthServiceImpl({FirebaseAuth? auth}) : _auth = auth ?? FirebaseAuth.instance;
+
   @override
   Future<Result<UserCredential>> login(String email, String password) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
       return Result.ok(userCredential);
     } on Exception catch (error) {
       return Result.error(error);
@@ -29,7 +34,7 @@ class AuthServiceImpl implements AuthService {
   @override
   Future<Result<void>> logout() async {
     try {
-      await FirebaseAuth.instance.signOut();
+      await _auth.signOut();
       return Result.ok(null);
     } on Exception catch (error) {
       return Result.error(error);
@@ -42,7 +47,7 @@ class AuthServiceImpl implements AuthService {
     String password,
   ) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
       return Result.ok(userCredential);
     } on Exception catch (error) {
@@ -53,7 +58,7 @@ class AuthServiceImpl implements AuthService {
   @override
   Future<Result<User?>> getCurrentUser() async {
     try {
-      User? user = FirebaseAuth.instance.currentUser;
+      User? user = _auth.currentUser;
       return Result.ok(user);
     } on Exception catch (error) {
       return Result.error(error);
@@ -62,6 +67,6 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Stream<User?> authStateChanges() {
-    return FirebaseAuth.instance.authStateChanges();
+    return _auth.authStateChanges();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:fiap_farms/data/models/product_analytic_model.dart';
+import 'package:fiap_farms/utils/firestore_collentions.dart';
 import 'package:fiap_farms/utils/result.dart';
 
 abstract class ProductAnalytic {
@@ -16,14 +17,19 @@ abstract class ProductAnalytic {
 }
 
 class ProductAnalyticServiceImpl implements ProductAnalytic {
+  final FirebaseFirestore _firestore;
+
+  ProductAnalyticServiceImpl({FirebaseFirestore? firestore})
+    : _firestore = firestore ?? FirebaseFirestore.instance;
+
   @override
   Future<Result<void>> createProductAnalytic(
     ProductAnalyticModel productAnalytic,
   ) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('productAnalytics')
-          .doc('${productAnalytic.userId}_$productAnalytic.productId')
+      await _firestore
+          .collection(FirestoreCollections.productAnalytics)
+          .doc('${productAnalytic.userId}_${productAnalytic.productId}')
           .set(productAnalytic.toMap());
 
       return Result.ok(null);
@@ -37,16 +43,16 @@ class ProductAnalyticServiceImpl implements ProductAnalytic {
     ProductAnalyticModel productAnalytic,
   ) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('productAnalytics')
-          .doc('${productAnalytic.userId}_$productAnalytic.productId')
+      await _firestore
+          .collection(FirestoreCollections.productAnalytics)
+          .doc('${productAnalytic.userId}_${productAnalytic.productId}')
           .update({
             "totalSoldQuantity": FieldValue.increment(
               productAnalytic.totalSoldQuantity,
             ),
             "totalRevenue": FieldValue.increment(productAnalytic.totalRevenue),
             "totalProfit": FieldValue.increment(productAnalytic.totalProfit),
-            "lastSaleDate": productAnalytic.lastSaleDate?.toIso8601String(),
+            "lastSaleDate": productAnalytic.lastSaleDate,
           });
 
       return Result.ok(null);
@@ -60,8 +66,8 @@ class ProductAnalyticServiceImpl implements ProductAnalytic {
     String userId,
   ) async {
     try {
-      final productAnalyticDocs = await FirebaseFirestore.instance
-          .collection('productAnalytics')
+      final productAnalyticDocs = await _firestore
+          .collection(FirestoreCollections.productAnalytics)
           .where('userId', isEqualTo: userId)
           .orderBy('totalProfit', descending: true)
           .get();

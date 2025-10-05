@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:fiap_farms/utils/firestore_collentions.dart';
 import 'package:fiap_farms/data/models/user_model.dart';
 import 'package:fiap_farms/utils/result.dart';
 
@@ -9,11 +10,16 @@ abstract class UserService {
 }
 
 class UserServiceImpl implements UserService {
+  final FirebaseFirestore _firestore;
+
+  UserServiceImpl({FirebaseFirestore? firestore})
+    : _firestore = firestore ?? FirebaseFirestore.instance;
+
   @override
   Future<Result<void>> createUser(UserModel user) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('users')
+      await _firestore
+          .collection(FirestoreCollections.users)
           .doc(user.id)
           .set(user.toMap());
 
@@ -26,8 +32,8 @@ class UserServiceImpl implements UserService {
   @override
   Future<Result<UserModel>> getUser(String userId) async {
     try {
-      final userDoc = await FirebaseFirestore.instance
-          .collection('users')
+      final userDoc = await _firestore
+          .collection(FirestoreCollections.users)
           .doc(userId)
           .get();
 

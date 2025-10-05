@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:fiap_farms/utils/firestore_collentions.dart';
 import 'package:fiap_farms/data/models/goal_model.dart';
 import 'package:fiap_farms/utils/result.dart';
 
@@ -12,11 +13,16 @@ abstract class GoalService {
 }
 
 class GoalServiceImpl implements GoalService {
+  final FirebaseFirestore _firestore;
+
+  GoalServiceImpl({FirebaseFirestore? firestore})
+    : _firestore = firestore ?? FirebaseFirestore.instance;
+
   @override
   Future<Result<GoalModel>> getGoal(String goalId) async {
     try {
-      final goalDoc = await FirebaseFirestore.instance
-          .collection('goals')
+      final goalDoc = await _firestore
+          .collection(FirestoreCollections.goals)
           .doc(goalId)
           .get();
 
@@ -33,7 +39,7 @@ class GoalServiceImpl implements GoalService {
   @override
   Future<Result<void>> createGoal(GoalModel goal) async {
     try {
-      await FirebaseFirestore.instance.collection('goals').add(goal.toMap());
+      await _firestore.collection(FirestoreCollections.goals).add(goal.toMap());
 
       return Result.ok(null);
     } on Exception catch (error) {
@@ -44,8 +50,8 @@ class GoalServiceImpl implements GoalService {
   @override
   Future<Result<void>> updateGoal(GoalModel goal) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('goals')
+      await _firestore
+          .collection(FirestoreCollections.goals)
           .doc(goal.id)
           .update(goal.toMap());
 
@@ -58,7 +64,10 @@ class GoalServiceImpl implements GoalService {
   @override
   Future<Result<void>> deleteGoal(String goalId) async {
     try {
-      await FirebaseFirestore.instance.collection('goals').doc(goalId).delete();
+      await _firestore
+          .collection(FirestoreCollections.goals)
+          .doc(goalId)
+          .delete();
 
       return Result.ok(null);
     } on Exception catch (error) {
@@ -69,8 +78,8 @@ class GoalServiceImpl implements GoalService {
   @override
   Future<Result<List<GoalModel>>> getAllGoals(String userId) async {
     try {
-      final goalDocs = await FirebaseFirestore.instance
-          .collection('goals')
+      final goalDocs = await _firestore
+          .collection(FirestoreCollections.goals)
           .where('userId', isEqualTo: userId)
           .get();
 

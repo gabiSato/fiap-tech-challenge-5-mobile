@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:fiap_farms/utils/firestore_collentions.dart';
 import 'package:fiap_farms/data/models/sale_model.dart';
 import 'package:fiap_farms/utils/result.dart';
 
@@ -12,11 +13,16 @@ abstract class SaleService {
 }
 
 class SaleServiceImpl implements SaleService {
+  final FirebaseFirestore _firestore;
+
+  SaleServiceImpl({FirebaseFirestore? firestore})
+    : _firestore = firestore ?? FirebaseFirestore.instance;
+
   @override
   Future<Result<SaleModel>> getSale(String saleId) async {
     try {
-      final saleDoc = await FirebaseFirestore.instance
-          .collection('sales')
+      final saleDoc = await _firestore
+          .collection(FirestoreCollections.sales)
           .doc(saleId)
           .get();
 
@@ -33,7 +39,7 @@ class SaleServiceImpl implements SaleService {
   @override
   Future<Result<void>> createSale(SaleModel sale) async {
     try {
-      await FirebaseFirestore.instance.collection('sales').add(sale.toMap());
+      await _firestore.collection(FirestoreCollections.sales).add(sale.toMap());
 
       return Result.ok(null);
     } on Exception catch (error) {
@@ -44,8 +50,8 @@ class SaleServiceImpl implements SaleService {
   @override
   Future<Result<void>> updateSale(SaleModel sale) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('sales')
+      await _firestore
+          .collection(FirestoreCollections.sales)
           .doc(sale.id)
           .update(sale.toMap());
 
@@ -58,7 +64,10 @@ class SaleServiceImpl implements SaleService {
   @override
   Future<Result<void>> deleteSale(String saleId) async {
     try {
-      await FirebaseFirestore.instance.collection('sales').doc(saleId).delete();
+      await _firestore
+          .collection(FirestoreCollections.sales)
+          .doc(saleId)
+          .delete();
 
       return Result.ok(null);
     } on Exception catch (error) {
@@ -69,8 +78,8 @@ class SaleServiceImpl implements SaleService {
   @override
   Future<Result<List<SaleModel>>> getAllSales(String userId) async {
     try {
-      final saleDocs = await FirebaseFirestore.instance
-          .collection('sales')
+      final saleDocs = await _firestore
+          .collection(FirestoreCollections.sales)
           .where('userId', isEqualTo: userId)
           .get();
 

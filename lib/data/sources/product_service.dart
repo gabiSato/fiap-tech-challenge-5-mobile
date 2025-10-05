@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:fiap_farms/utils/firestore_collentions.dart';
 import 'package:fiap_farms/data/models/product_model.dart';
 import 'package:fiap_farms/utils/result.dart';
 
@@ -15,11 +16,16 @@ abstract class ProductService {
 }
 
 class ProductServiceImpl implements ProductService {
+  final FirebaseFirestore _firestore;
+
+  ProductServiceImpl({FirebaseFirestore? firestore})
+    : _firestore = firestore ?? FirebaseFirestore.instance;
+
   @override
   Future<Result<ProductModel>> getProduct(String productId) async {
     try {
-      final productDoc = await FirebaseFirestore.instance
-          .collection('products')
+      final productDoc = await _firestore
+          .collection(FirestoreCollections.products)
           .doc(productId)
           .get();
 
@@ -36,8 +42,8 @@ class ProductServiceImpl implements ProductService {
   @override
   Future<Result<void>> createProduct(ProductModel product) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('products')
+      await _firestore
+          .collection(FirestoreCollections.products)
           .add(product.toMap());
 
       return Result.ok(null);
@@ -49,8 +55,8 @@ class ProductServiceImpl implements ProductService {
   @override
   Future<Result<void>> updateProduct(ProductModel product) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('products')
+      await _firestore
+          .collection(FirestoreCollections.products)
           .doc(product.id)
           .update(product.toMap());
 
@@ -66,8 +72,8 @@ class ProductServiceImpl implements ProductService {
     double productQuantity,
   ) async {
     try {
-      await FirebaseFirestore.instance
-          .collection('products')
+      await _firestore
+          .collection(FirestoreCollections.products)
           .doc(productId)
           .update({'quantity': FieldValue.increment(productQuantity)});
 
@@ -80,8 +86,8 @@ class ProductServiceImpl implements ProductService {
   @override
   Future<Result<List<ProductModel>>> getProducts(String userId) async {
     try {
-      final productDocs = await FirebaseFirestore.instance
-          .collection('products')
+      final productDocs = await _firestore
+          .collection(FirestoreCollections.products)
           .where('userId', isEqualTo: userId)
           .get();
 
