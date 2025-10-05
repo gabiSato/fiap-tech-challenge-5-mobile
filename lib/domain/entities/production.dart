@@ -3,8 +3,8 @@ class Production {
   final String userId;
   final String productId;
   final String status;
-  final int quantityPlanted;
-  final int? quantityHarvested;
+  final double quantityPlanted;
+  final double? quantityHarvested;
   final DateTime startDate;
   final DateTime? harvestDate;
 
