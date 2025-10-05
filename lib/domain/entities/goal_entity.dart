@@ -1,7 +1,7 @@
-class Goal {
+class GoalEntity {
   final String? id;
-  final String userId;
   final String? productId;
+  final String userId;
   final String type;
   final String description;
   final double targetValue;
@@ -10,10 +10,10 @@ class Goal {
   final DateTime endDate;
   final String status;
 
-  Goal({
+  GoalEntity({
     this.id,
-    required this.userId,
     this.productId,
+    required this.userId,
     required this.type,
     required this.description,
     required this.targetValue,

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:fiap_farms/domain/entities/goal_entity.dart';
+
 class GoalModel {
   final String? id;
   final String userId;
@@ -8,8 +10,8 @@ class GoalModel {
   final String description;
   final double targetValue;
   final double currentValue;
-  final DateTime? startDate;
-  final DateTime? endDate;
+  final DateTime startDate;
+  final DateTime endDate;
   final String status;
 
   GoalModel({
@@ -20,8 +22,8 @@ class GoalModel {
     required this.description,
     required this.targetValue,
     required this.currentValue,
-    this.startDate,
-    this.endDate,
+    required this.startDate,
+    required this.endDate,
     required this.status,
   });
 
@@ -34,12 +36,8 @@ class GoalModel {
       description: map['description'] ?? '',
       targetValue: map['targetValue'] ?? 0,
       currentValue: map['currentValue'] ?? 0,
-      startDate: map['startDate'] != null
-          ? (map['startDate'] as Timestamp).toDate()
-          : null,
-      endDate: map['endDate'] != null
-          ? (map['endDate'] as Timestamp).toDate()
-          : null,
+      startDate: (map['startDate'] as Timestamp).toDate(),
+      endDate: (map['endDate'] as Timestamp).toDate(),
       status: map['status'] ?? '',
     );
   }
@@ -56,5 +54,35 @@ class GoalModel {
       'endDate': endDate,
       'status': status,
     };
+  }
+
+  factory GoalModel.fromEntity(GoalEntity entity) {
+    return GoalModel(
+      id: entity.id,
+      userId: entity.userId,
+      productId: entity.productId,
+      type: entity.type,
+      description: entity.description,
+      targetValue: entity.targetValue,
+      currentValue: entity.currentValue,
+      startDate: entity.startDate,
+      endDate: entity.endDate,
+      status: entity.status,
+    );
+  }
+
+  GoalEntity toEntity() {
+    return GoalEntity(
+      id: id,
+      userId: userId,
+      productId: productId,
+      type: type,
+      description: description,
+      targetValue: targetValue,
+      currentValue: currentValue,
+      startDate: startDate!,
+      endDate: endDate!,
+      status: status,
+    );
   }
 }
