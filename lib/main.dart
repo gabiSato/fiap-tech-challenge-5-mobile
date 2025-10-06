@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'package:fiap_farms/config/service_locator.dart';
 import 'package:fiap_farms/ui/core/themes/theme.dart';
 import 'package:fiap_farms/ui/core/themes/texts.dart';
 import 'package:fiap_farms/routing/router.dart';
@@ -12,6 +13,8 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseAuth.instanceFor(app: Firebase.app());
+
+  setupServiceLocator();
 
   runApp(const App());
 }
