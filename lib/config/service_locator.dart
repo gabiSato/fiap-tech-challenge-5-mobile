@@ -8,9 +8,11 @@ import 'package:fiap_farms/domain/repositories/auth_repository.dart';
 
 import 'package:fiap_farms/domain/use_cases/auth/login_usecase.dart';
 
+import 'package:fiap_farms/ui/auth/stores/login_store.dart';
+
 final sl = GetIt.instance;
 
-void setupServiceLocator() {
+void setupLocator() {
   sl.registerLazySingleton<AuthService>(() => AuthServiceImpl());
   sl.registerLazySingleton<UserService>(() => UserServiceImpl());
 
@@ -19,4 +21,6 @@ void setupServiceLocator() {
   );
 
   sl.registerLazySingleton(() => LoginUseCase(sl<AuthRepository>()));
+
+  sl.registerFactory(() => LoginStore(sl<LoginUseCase>()));
 }

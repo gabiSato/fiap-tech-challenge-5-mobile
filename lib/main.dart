@@ -14,7 +14,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseAuth.instanceFor(app: Firebase.app());
 
-  setupServiceLocator();
+  setupLocator();
 
   runApp(const App());
 }
