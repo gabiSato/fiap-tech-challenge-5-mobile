@@ -8,10 +8,10 @@ class UserEntity {
   final LocationEntity? location;
 
   UserEntity({
-    this.id,
     required this.farmName,
     required this.ownerName,
     required this.email,
+    this.id,
     this.location,
   });
 

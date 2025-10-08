@@ -8,11 +8,11 @@ class ProductModel {
   final double quantity;
 
   ProductModel({
-    this.id,
     required this.userId,
     required this.name,
     required this.unitOfMeasure,
     required this.quantity,
+    this.id,
   });
 
   factory ProductModel.fromMap(Map<String, dynamic> map, String id) {

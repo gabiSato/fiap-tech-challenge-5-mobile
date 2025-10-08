@@ -9,12 +9,12 @@ class ProductionEntity {
   final DateTime? harvestDate;
 
   ProductionEntity({
-    this.id,
     required this.userId,
     required this.productId,
     required this.status,
     required this.quantityPlanted,
     required this.startDate,
+    this.id,
     this.quantityHarvested,
     this.harvestDate,
   });

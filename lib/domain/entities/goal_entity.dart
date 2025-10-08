@@ -11,8 +11,6 @@ class GoalEntity {
   final String status;
 
   GoalEntity({
-    this.id,
-    this.productId,
     required this.userId,
     required this.type,
     required this.description,
@@ -21,5 +19,7 @@ class GoalEntity {
     required this.startDate,
     required this.endDate,
     required this.status,
+    this.id,
+    this.productId,
   });
 }

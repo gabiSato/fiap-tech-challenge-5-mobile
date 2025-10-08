@@ -16,7 +16,6 @@ class SaleModel {
   final double totalProfit;
 
   SaleModel({
-    this.id,
     required this.userId,
     required this.productId,
     required this.saleDate,
@@ -27,6 +26,7 @@ class SaleModel {
     required this.unitPrice,
     required this.totalAmount,
     required this.totalProfit,
+    this.id,
   });
 
   factory SaleModel.fromMap(Map<String, dynamic> map, String id) {

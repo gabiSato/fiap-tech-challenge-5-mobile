@@ -12,7 +12,6 @@ class SaleEntity {
   final double totalProfit;
 
   SaleEntity({
-    this.id,
     required this.userId,
     required this.productId,
     required this.saleDate,
@@ -23,5 +22,6 @@ class SaleEntity {
     required this.unitPrice,
     required this.totalAmount,
     required this.totalProfit,
+    this.id,
   });
 }

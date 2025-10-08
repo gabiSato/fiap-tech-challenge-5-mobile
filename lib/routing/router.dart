@@ -1,38 +1,38 @@
 import 'package:go_router/go_router.dart';
 
+import 'package:fiap_farms/ui/auth/create_user/widgets/create_user_screen.dart';
 import 'package:fiap_farms/ui/production/widgets/productions_screen.dart';
-import 'package:fiap_farms/ui/user/widgets/user_registration_screen.dart';
-import 'package:fiap_farms/ui/auth/widgets/login_screen.dart';
+import 'package:fiap_farms/ui/auth/login/widgets/login_screen.dart';
 import 'package:fiap_farms/ui/home/widgets/home_screen.dart';
 
-import 'routes.dart';
+import 'package:fiap_farms/routing/routes.dart';
 
-GoRouter router() => GoRouter(
-  initialLocation: Routes.home,
+GoRouter router = GoRouter(
+  initialLocation: Routes.login,
   debugLogDiagnostics: true,
   routes: [
     GoRoute(
       path: Routes.login,
       builder: (context, state) {
-        return LoginScreen();
+        return const LoginScreen();
       },
     ),
     GoRoute(
       path: Routes.userRegistration,
       builder: (context, state) {
-        return UserRegistrationScreen();
+        return const CreateUserScreen();
       },
     ),
     GoRoute(
       path: Routes.home,
       builder: (context, state) {
-        return HomeScreen();
+        return const HomeScreen();
       },
     ),
     GoRoute(
       path: Routes.productions,
       builder: (context, state) {
-        return ProductionsScreen();
+        return const ProductionsScreen();
       },
     ),
   ],

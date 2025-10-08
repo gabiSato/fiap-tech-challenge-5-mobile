@@ -6,10 +6,10 @@ class ProductEntity {
   final double quantity;
 
   ProductEntity({
-    this.id,
     required this.userId,
     required this.name,
     required this.unitOfMeasure,
     required this.quantity,
+    this.id,
   });
 }
