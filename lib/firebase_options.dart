@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'tech-challenge-bytebank.firebasestorage.app',
     iosBundleId: 'com.example.fiapFarms',
   );
+
 }
