@@ -1,7 +1,9 @@
-import 'package:fiap_farms/domain/entities/user_entity.dart';
-import 'package:fiap_farms/domain/use_cases/auth/create_credential_usecase.dart';
-import 'package:fiap_farms/utils/result.dart';
 import 'package:mobx/mobx.dart';
+
+import 'package:fiap_farms/domain/use_cases/auth/create_credential_usecase.dart';
+import 'package:fiap_farms/domain/entities/user_entity.dart';
+
+import 'package:fiap_farms/utils/result.dart';
 
 part 'create_user_store.g.dart';
 
@@ -105,9 +107,7 @@ abstract class CreateUserStoreBase with Store {
   void validateEmail(String value) {
     if (value.isEmpty) {
       emailError = 'E-mail é obrigatório';
-    } else if (!RegExp(
-      r'^[\w-.]+@([\w-]+.)+[\w-]{2,4}$',
-    ).hasMatch(value)) {
+    } else if (!RegExp(r'^[\w-.]+@([\w-]+.)+[\w-]{2,4}$').hasMatch(value)) {
       emailError = 'Formato de e-mail inválido';
     } else {
       emailError = null;

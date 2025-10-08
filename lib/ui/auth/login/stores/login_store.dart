@@ -1,7 +1,9 @@
+import 'package:mobx/mobx.dart';
+
 import 'package:fiap_farms/domain/entities/user_entity.dart';
 import 'package:fiap_farms/domain/use_cases/auth/login_usecase.dart';
+
 import 'package:fiap_farms/utils/result.dart';
-import 'package:mobx/mobx.dart';
 
 part 'login_store.g.dart';
 

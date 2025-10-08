@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:fiap_farms/ui/auth/logout/widgets/logout_button.dart';
+
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
@@ -11,10 +13,7 @@ class HomeAppBar extends StatelessWidget {
           onPressed: () {},
           icon: const Icon(Icons.notifications_outlined, color: Colors.white),
         ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.logout, color: Colors.white),
-        ),
+        LogoutButton(),
       ],
       expandedHeight: 220,
       flexibleSpace: FlexibleSpaceBar(
