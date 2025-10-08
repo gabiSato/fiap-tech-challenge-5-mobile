@@ -29,7 +29,7 @@ class HomeAppBar extends StatelessWidget {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    Theme.of(context).colorScheme.primary.withOpacity(0.6),
+                    Theme.of(context).colorScheme.primary.withAlpha(153),
                   ],
                 ),
               ),

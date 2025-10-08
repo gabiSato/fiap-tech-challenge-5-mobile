@@ -8,17 +8,9 @@ part of 'login_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$LoginStore on _LoginStore, Store {
-  Computed<bool>? _$isValidComputed;
-
-  @override
-  bool get isValid => (_$isValidComputed ??= Computed<bool>(
-    () => super.isValid,
-    name: '_LoginStore.isValid',
-  )).value;
-
+mixin _$LoginStore on LoginStoreBase, Store {
   late final _$isLoadingAtom = Atom(
-    name: '_LoginStore.isLoading',
+    name: 'LoginStoreBase.isLoading',
     context: context,
   );
 
@@ -36,7 +28,7 @@ mixin _$LoginStore on _LoginStore, Store {
   }
 
   late final _$errorMessageAtom = Atom(
-    name: '_LoginStore.errorMessage',
+    name: 'LoginStoreBase.errorMessage',
     context: context,
   );
 
@@ -53,7 +45,7 @@ mixin _$LoginStore on _LoginStore, Store {
     });
   }
 
-  late final _$emailAtom = Atom(name: '_LoginStore.email', context: context);
+  late final _$emailAtom = Atom(name: 'LoginStoreBase.email', context: context);
 
   @override
   String get email {
@@ -69,7 +61,7 @@ mixin _$LoginStore on _LoginStore, Store {
   }
 
   late final _$passwordAtom = Atom(
-    name: '_LoginStore.password',
+    name: 'LoginStoreBase.password',
     context: context,
   );
 
@@ -87,7 +79,7 @@ mixin _$LoginStore on _LoginStore, Store {
   }
 
   late final _$emailErrorAtom = Atom(
-    name: '_LoginStore.emailError',
+    name: 'LoginStoreBase.emailError',
     context: context,
   );
 
@@ -105,7 +97,7 @@ mixin _$LoginStore on _LoginStore, Store {
   }
 
   late final _$passwordErrorAtom = Atom(
-    name: '_LoginStore.passwordError',
+    name: 'LoginStoreBase.passwordError',
     context: context,
   );
 
@@ -123,7 +115,7 @@ mixin _$LoginStore on _LoginStore, Store {
   }
 
   late final _$loginAsyncAction = AsyncAction(
-    '_LoginStore.login',
+    'LoginStoreBase.login',
     context: context,
   );
 
@@ -132,56 +124,56 @@ mixin _$LoginStore on _LoginStore, Store {
     return _$loginAsyncAction.run(() => super.login());
   }
 
-  late final _$_LoginStoreActionController = ActionController(
-    name: '_LoginStore',
+  late final _$LoginStoreBaseActionController = ActionController(
+    name: 'LoginStoreBase',
     context: context,
   );
 
   @override
   void setEmail(String value) {
-    final _$actionInfo = _$_LoginStoreActionController.startAction(
-      name: '_LoginStore.setEmail',
+    final _$actionInfo = _$LoginStoreBaseActionController.startAction(
+      name: 'LoginStoreBase.setEmail',
     );
     try {
       return super.setEmail(value);
     } finally {
-      _$_LoginStoreActionController.endAction(_$actionInfo);
+      _$LoginStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPassword(String value) {
-    final _$actionInfo = _$_LoginStoreActionController.startAction(
-      name: '_LoginStore.setPassword',
+    final _$actionInfo = _$LoginStoreBaseActionController.startAction(
+      name: 'LoginStoreBase.setPassword',
     );
     try {
       return super.setPassword(value);
     } finally {
-      _$_LoginStoreActionController.endAction(_$actionInfo);
+      _$LoginStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validateEmail(String value) {
-    final _$actionInfo = _$_LoginStoreActionController.startAction(
-      name: '_LoginStore.validateEmail',
+    final _$actionInfo = _$LoginStoreBaseActionController.startAction(
+      name: 'LoginStoreBase.validateEmail',
     );
     try {
       return super.validateEmail(value);
     } finally {
-      _$_LoginStoreActionController.endAction(_$actionInfo);
+      _$LoginStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void validatePassword(String value) {
-    final _$actionInfo = _$_LoginStoreActionController.startAction(
-      name: '_LoginStore.validatePassword',
+    final _$actionInfo = _$LoginStoreBaseActionController.startAction(
+      name: 'LoginStoreBase.validatePassword',
     );
     try {
       return super.validatePassword(value);
     } finally {
-      _$_LoginStoreActionController.endAction(_$actionInfo);
+      _$LoginStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
@@ -193,8 +185,7 @@ errorMessage: ${errorMessage},
 email: ${email},
 password: ${password},
 emailError: ${emailError},
-passwordError: ${passwordError},
-isValid: ${isValid}
+passwordError: ${passwordError}
     ''';
   }
 }

@@ -1,17 +1,16 @@
-import 'package:mobx/mobx.dart';
-
-import 'package:fiap_farms/domain/use_cases/auth/login_usecase.dart';
 import 'package:fiap_farms/domain/entities/user_entity.dart';
+import 'package:fiap_farms/domain/use_cases/auth/login_usecase.dart';
 import 'package:fiap_farms/utils/result.dart';
+import 'package:mobx/mobx.dart';
 
 part 'login_store.g.dart';
 
-class LoginStore = _LoginStore with _$LoginStore;
+class LoginStore = LoginStoreBase with _$LoginStore;
 
-abstract class _LoginStore with Store {
+abstract class LoginStoreBase with Store {
   final LoginUseCase _loginUseCase;
 
-  _LoginStore(this._loginUseCase) {
+  LoginStoreBase(this._loginUseCase) {
     _setupValidations();
   }
 
@@ -76,19 +75,25 @@ abstract class _LoginStore with Store {
     }
   }
 
-  @computed
-  bool get isValid => emailError == null && passwordError == null;
+  bool _validateAll() {
+    validateEmail(email);
+    validatePassword(password);
+
+    return emailError == null && passwordError == null;
+  }
 
   @action
   Future<void> login() async {
-    isLoading = true;
-    errorMessage = null;
+    if (_validateAll()) {
+      isLoading = true;
+      errorMessage = null;
 
-    final result = await _loginUseCase.call(email: email, password: password);
-    isLoading = false;
+      final result = await _loginUseCase.call(email: email, password: password);
+      isLoading = false;
 
-    if (result is Error<UserEntity>) {
-      errorMessage = result.error.toString();
+      if (result is Error<UserEntity>) {
+        errorMessage = result.error.toString();
+      }
     }
   }
 
