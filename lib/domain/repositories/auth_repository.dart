@@ -10,4 +10,5 @@ abstract class AuthRepository {
     UserEntity user,
   );
   Stream<String?> authStateChanges();
+  Future<Result<UserEntity?>> getCurrentUser();
 }

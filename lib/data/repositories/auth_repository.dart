@@ -54,6 +54,18 @@ class AuthRepositoryImpl implements AuthRepository {
     return _authService.logout();
   }
 
+  @override
+  Future<Result<UserEntity?>> getCurrentUser() async {
+    final currentUserResult = await _authService.getCurrentUser();
+
+    return switch (currentUserResult) {
+      Ok(value: final user) when user != null => await _getUserEntity(user.uid),
+      Ok(value: null) => const Result.ok(null),
+      Error(error: final error) => Result.error(error),
+      _ => const Result.ok(null),
+    };
+  }
+
   Future<Result<UserEntity>> _getUserEntity(String uid) async {
     final userResult = await _userService.getUser(uid);
     return switch (userResult) {

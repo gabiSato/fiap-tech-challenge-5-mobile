@@ -3,4 +3,5 @@ abstract final class Routes {
   static const login = '/login';
   static const userRegistration = '/userRegistration';
   static const productions = '/productions';
+  static const products = '/products';
 }

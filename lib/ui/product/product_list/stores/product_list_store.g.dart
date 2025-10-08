@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'logout_store.dart';
+part of 'product_list_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,9 +8,9 @@ part of 'logout_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$LogoutStore on LogoutStoreBase, Store {
+mixin _$ProductListStore on _ProductListStore, Store {
   late final _$isLoadingAtom = Atom(
-    name: 'LogoutStoreBase.isLoading',
+    name: '_ProductListStore.isLoading',
     context: context,
   );
 
@@ -27,39 +27,39 @@ mixin _$LogoutStore on LogoutStoreBase, Store {
     });
   }
 
-  late final _$errorMessageAtom = Atom(
-    name: 'LogoutStoreBase.errorMessage',
+  late final _$productsAtom = Atom(
+    name: '_ProductListStore.products',
     context: context,
   );
 
   @override
-  String? get errorMessage {
-    _$errorMessageAtom.reportRead();
-    return super.errorMessage;
+  ObservableList<ProductEntity> get products {
+    _$productsAtom.reportRead();
+    return super.products;
   }
 
   @override
-  set errorMessage(String? value) {
-    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
-      super.errorMessage = value;
+  set products(ObservableList<ProductEntity> value) {
+    _$productsAtom.reportWrite(value, super.products, () {
+      super.products = value;
     });
   }
 
-  late final _$logoutAsyncAction = AsyncAction(
-    'LogoutStoreBase.logout',
+  late final _$fetchProductsAsyncAction = AsyncAction(
+    '_ProductListStore.fetchProducts',
     context: context,
   );
 
   @override
-  Future<void> logout() {
-    return _$logoutAsyncAction.run(() => super.logout());
+  Future<void> fetchProducts() {
+    return _$fetchProductsAsyncAction.run(() => super.fetchProducts());
   }
 
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
-errorMessage: ${errorMessage}
+products: ${products}
     ''';
   }
 }

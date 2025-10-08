@@ -22,6 +22,11 @@ class HomeScreen extends StatelessWidget {
         'route': '/inventory',
       },
       {'icon': Icons.task_alt_outlined, 'label': 'Metas', 'route': '/goals'},
+      {
+        'icon': Icons.inventory_2_outlined,
+        'label': 'Produtos',
+        'route': Routes.products,
+      },
     ];
 
     return Scaffold(
