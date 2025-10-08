@@ -126,6 +126,7 @@ abstract class _ProductFormStore with Store {
 
       if (user == null || user.id == null) {
         errorMessage = 'Usuário não encontrado';
+        isLoading = false;
         return;
       }
 

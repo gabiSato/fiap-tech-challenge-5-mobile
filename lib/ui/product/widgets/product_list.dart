@@ -46,8 +46,8 @@ class ProductList extends StatelessWidget {
               title: Text(product.name),
               subtitle: Text(product.unitOfMeasure),
               trailing: IconButton(
-                onPressed: () {
-                  showDialog(
+                onPressed: () async {
+                  await showDialog(
                     context: context,
                     fullscreenDialog: true,
                     useSafeArea: false,
@@ -55,6 +55,7 @@ class ProductList extends StatelessWidget {
                       return ProductForm(product: product);
                     },
                   );
+                  store.fetchProducts();
                 },
                 icon: Icon(Icons.edit),
               ),

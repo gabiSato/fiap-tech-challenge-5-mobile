@@ -35,7 +35,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
       ),
       body: ProductList(store: _store),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _showFullScreenDialog(context),
+        onPressed: () async {
+          await _showFullScreenDialog(context);
+          _store.fetchProducts();
+        },
         child: const Icon(Icons.add),
       ),
     );
