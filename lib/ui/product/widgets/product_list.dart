@@ -1,6 +1,8 @@
-import 'package:fiap_farms/ui/product/product_list/stores/product_list_store.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter/material.dart';
+
+import 'package:fiap_farms/ui/product/stores/product_list_store.dart';
+import 'package:fiap_farms/ui/product/widgets/product_form.dart';
 
 class ProductList extends StatelessWidget {
   const ProductList({required this.store, super.key});
@@ -43,6 +45,19 @@ class ProductList extends StatelessWidget {
             return ListTile(
               title: Text(product.name),
               subtitle: Text(product.unitOfMeasure),
+              trailing: IconButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    fullscreenDialog: true,
+                    useSafeArea: false,
+                    builder: (context) {
+                      return ProductForm(product: product);
+                    },
+                  );
+                },
+                icon: Icon(Icons.edit),
+              ),
             );
           },
         );

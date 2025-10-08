@@ -1,8 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fiap_farms/ui/product/product_list/stores/product_list_store.dart';
-import 'package:fiap_farms/ui/product/product_list/widgets/product_list.dart';
+import 'package:fiap_farms/ui/product/stores/product_list_store.dart';
+import 'package:fiap_farms/ui/product/widgets/product_form.dart';
+import 'package:fiap_farms/ui/product/widgets/product_list.dart';
 import 'package:fiap_farms/dependencies/service_locator.dart';
 import 'package:fiap_farms/routing/routes.dart';
 
@@ -33,6 +34,19 @@ class _ProductListScreenState extends State<ProductListScreen> {
         ),
       ),
       body: ProductList(store: _store),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _showFullScreenDialog(context),
+        child: const Icon(Icons.add),
+      ),
     );
   }
+}
+
+Future<dynamic> _showFullScreenDialog(BuildContext context) {
+  return showDialog(
+    context: context,
+    fullscreenDialog: true,
+    useSafeArea: false,
+    builder: (BuildContext context) => ProductForm(),
+  );
 }

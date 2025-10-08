@@ -27,6 +27,24 @@ mixin _$ProductListStore on _ProductListStore, Store {
     });
   }
 
+  late final _$errorMessageAtom = Atom(
+    name: '_ProductListStore.errorMessage',
+    context: context,
+  );
+
+  @override
+  String? get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String? value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
   late final _$productsAtom = Atom(
     name: '_ProductListStore.products',
     context: context,
@@ -59,6 +77,7 @@ mixin _$ProductListStore on _ProductListStore, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
+errorMessage: ${errorMessage},
 products: ${products}
     ''';
   }

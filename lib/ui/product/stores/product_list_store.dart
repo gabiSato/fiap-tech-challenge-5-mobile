@@ -1,8 +1,9 @@
 import 'package:mobx/mobx.dart';
-import 'package:fiap_farms/domain/entities/product_entity.dart';
-import 'package:fiap_farms/domain/entities/user_entity.dart';
+
 import 'package:fiap_farms/domain/use_cases/auth/get_current_user_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/product/get_products_usecase.dart';
+import 'package:fiap_farms/domain/entities/product_entity.dart';
+import 'package:fiap_farms/domain/entities/user_entity.dart';
 import 'package:fiap_farms/utils/result.dart';
 
 part 'product_list_store.g.dart';
