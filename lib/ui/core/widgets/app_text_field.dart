@@ -35,9 +35,6 @@ class AppTextField extends StatelessWidget {
         hintText: hintText,
         errorText: errorText,
         icon: icon != null ? Icon(icon) : null,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
       ),
       validator: validator,
       onChanged: onChanged,

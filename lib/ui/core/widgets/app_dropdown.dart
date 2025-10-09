@@ -22,11 +22,7 @@ class AppDropdown<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<T>(
       initialValue: value,
-      decoration: InputDecoration(
-        labelText: labelText,
-        hintText: hintText,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
-      ),
+      decoration: InputDecoration(labelText: labelText, hintText: hintText),
       items: items,
       validator: validator,
       onChanged: onChanged,
