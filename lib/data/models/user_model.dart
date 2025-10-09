@@ -88,8 +88,12 @@ class UserModel {
       'farmName': farmName,
       'location': location,
       'farmAreaId': farmAreaId,
-      'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : null,
-      'updatedAt': updatedAt != null ? Timestamp.fromDate(updatedAt!) : null,
+      'createdAt': createdAt != null
+          ? Timestamp.fromDate(createdAt!)
+          : Timestamp.now(),
+      'updatedAt': updatedAt != null
+          ? Timestamp.fromDate(updatedAt!)
+          : Timestamp.now(),
     };
   }
 }
