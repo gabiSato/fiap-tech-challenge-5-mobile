@@ -47,12 +47,15 @@ class ProductAnalyticServiceImpl implements ProductAnalyticService {
           .collection(FirestoreCollections.productAnalytics)
           .doc('${productAnalytic.userId}_${productAnalytic.productId}')
           .update({
-            "totalSoldQuantity": FieldValue.increment(
-              productAnalytic.totalSoldQuantity,
+            "totalQuantitySold": FieldValue.increment(
+              productAnalytic.totalQuantitySold,
             ),
             "totalRevenue": FieldValue.increment(productAnalytic.totalRevenue),
-            "totalProfit": FieldValue.increment(productAnalytic.totalProfit),
-            "lastSaleDate": productAnalytic.lastSaleDate,
+            "totalCost": FieldValue.increment(productAnalytic.totalCost),
+            "profit": FieldValue.increment(productAnalytic.profit),
+            "profitMargin": productAnalytic.profitMargin,
+            "averagePrice": productAnalytic.averagePrice,
+            "lastUpdated": productAnalytic.lastUpdated,
           });
 
       return Result.ok(null);
@@ -73,7 +76,7 @@ class ProductAnalyticServiceImpl implements ProductAnalyticService {
           .get();
 
       List<ProductAnalyticModel> productAnalytics = productAnalyticDocs.docs
-          .map((doc) => ProductAnalyticModel.fromMap(doc.data()))
+          .map((doc) => ProductAnalyticModel.fromMap(doc.data(), doc.id))
           .toList();
 
       return Result.ok(productAnalytics);
