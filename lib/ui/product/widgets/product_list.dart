@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:fiap_farms/ui/product/stores/product_list_store.dart';
 import 'package:fiap_farms/ui/product/widgets/product_form.dart';
+import 'package:fiap_farms/ui/core/widgets/widgets.dart';
 
 class ProductList extends StatelessWidget {
   const ProductList({required this.store, super.key});
@@ -44,16 +45,15 @@ class ProductList extends StatelessWidget {
 
             return ListTile(
               title: Text(product.name),
-              subtitle: Text('Categoria: ${product.category.name} | Preço: R\$${product.pricePerUnit.toStringAsFixed(2)} / ${product.unit.name}'),
+              subtitle: Text(
+                'Categoria: ${product.category.name} | Preço: R\$${product.pricePerUnit.toStringAsFixed(2)} / ${product.unit.name}',
+              ),
               trailing: IconButton(
                 onPressed: () async {
-                  await showDialog(
-                    context: context,
-                    fullscreenDialog: true,
-                    useSafeArea: false,
-                    builder: (context) {
-                      return ProductForm(product: product);
-                    },
+                  await FullScreenDialog.show(
+                    context,
+                    title: 'Editar Produto',
+                    child: ProductForm(product: product),
                   );
                   store.fetchProducts();
                 },

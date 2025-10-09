@@ -26,92 +26,80 @@ class _ProductFormState extends State<ProductForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.product == null ? 'Novo Produto' : 'Editar Produto'),
-        leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(Icons.close),
-        ),
-      ),
-      body: Observer(
-        builder: (_) {
-          if (_store.isSaved) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.of(context).pop();
-            });
-          }
+    return Observer(
+      builder: (_) {
+        if (_store.isSaved) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.of(context).pop();
+          });
+        }
 
-          if (_store.errorMessage != null) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              showErrorSnackBar(context, _store.errorMessage!);
-              _store.errorMessage = null;
-            });
-          }
+        if (_store.errorMessage != null) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            showErrorSnackBar(context, _store.errorMessage!);
+            _store.errorMessage = null;
+          });
+        }
 
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                AppTextField(
-                  controller: TextEditingController(text: _store.name),
-                  labelText: "Nome do produto",
-                  errorText: _store.nameError,
-                  onChanged: _store.setName,
-                ),
-                const SizedBox(height: 16),
-                AppDropdown<ProductCategory>(
-                  value: _store.category,
-                  labelText: 'Categoria',
-                  hintText: _store.categoryError,
-                  items: ProductCategory.values.map((category) {
-                    return DropdownMenuItem(
-                      value: category,
-                      child: Text(category.name),
-                    );
-                  }).toList(),
-                  onChanged: _store.setCategory,
-                ),
-                const SizedBox(height: 16),
-                AppDropdown<ProductUnit>(
-                  value: _store.unit,
-                  labelText: 'Unidade',
-                  hintText: _store.unitError,
-                  items: ProductUnit.values.map((unit) {
-                    return DropdownMenuItem(
-                      value: unit,
-                      child: Text(unit.name),
-                    );
-                  }).toList(),
-                  onChanged: _store.setUnit,
-                ),
-                const SizedBox(height: 16),
-                AppCurrencyTextField(
-                  controller: TextEditingController(text: _store.pricePerUnit),
-                  labelText: "Preço por unidade",
-                  errorText: _store.pricePerUnitError,
-                  onChanged: _store.setPricePerUnit,
-                ),
-                const SizedBox(height: 16),
-                AppTextField(
-                  controller: TextEditingController(text: _store.currentStock),
-                  labelText: "Estoque atual",
-                  errorText: _store.currentStockError,
-                  keyboardType: TextInputType.number,
-                  onChanged: _store.setCurrentStock,
-                ),
-                const SizedBox(height: 32),
-                SubmitButton(
-                  onPressed: _store.saveProduct,
-                  text: 'Salvar',
-                  isLoading: _store.isLoading,
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              AppTextField(
+                controller: TextEditingController(text: _store.name),
+                labelText: "Nome do produto",
+                errorText: _store.nameError,
+                onChanged: _store.setName,
+              ),
+              const SizedBox(height: 16),
+              AppDropdown<ProductCategory>(
+                value: _store.category,
+                labelText: 'Categoria',
+                hintText: _store.categoryError,
+                items: ProductCategory.values.map((category) {
+                  return DropdownMenuItem(
+                    value: category,
+                    child: Text(category.name),
+                  );
+                }).toList(),
+                onChanged: _store.setCategory,
+              ),
+              const SizedBox(height: 16),
+              AppDropdown<ProductUnit>(
+                value: _store.unit,
+                labelText: 'Unidade',
+                hintText: _store.unitError,
+                items: ProductUnit.values.map((unit) {
+                  return DropdownMenuItem(value: unit, child: Text(unit.name));
+                }).toList(),
+                onChanged: _store.setUnit,
+              ),
+              const SizedBox(height: 16),
+              AppCurrencyTextField(
+                controller: TextEditingController(text: _store.pricePerUnit),
+                labelText: "Preço por unidade",
+                errorText: _store.pricePerUnitError,
+                onChanged: _store.setPricePerUnit,
+              ),
+              const SizedBox(height: 16),
+              AppTextField(
+                controller: TextEditingController(text: _store.currentStock),
+                labelText: "Estoque atual",
+                errorText: _store.currentStockError,
+                keyboardType: TextInputType.number,
+                onChanged: _store.setCurrentStock,
+              ),
+              const SizedBox(height: 32),
+              SubmitButton(
+                onPressed: _store.saveProduct,
+                text: 'Salvar',
+                isLoading: _store.isLoading,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

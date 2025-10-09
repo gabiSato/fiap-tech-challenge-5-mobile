@@ -5,6 +5,7 @@ import 'package:fiap_farms/ui/product/stores/product_list_store.dart';
 import 'package:fiap_farms/ui/product/widgets/product_form.dart';
 import 'package:fiap_farms/ui/product/widgets/product_list.dart';
 import 'package:fiap_farms/dependencies/service_locator.dart';
+import 'package:fiap_farms/ui/core/widgets/widgets.dart';
 import 'package:fiap_farms/routing/routes.dart';
 
 class ProductListScreen extends StatefulWidget {
@@ -36,20 +37,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
       body: ProductList(store: _store),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await _showFullScreenDialog(context);
+          await FullScreenDialog.show(
+            context,
+            title: 'Novo Produto',
+            child: const ProductForm(),
+          );
           _store.fetchProducts();
         },
         child: const Icon(Icons.add),
       ),
     );
   }
-}
-
-Future<dynamic> _showFullScreenDialog(BuildContext context) {
-  return showDialog(
-    context: context,
-    fullscreenDialog: true,
-    useSafeArea: false,
-    builder: (BuildContext context) => ProductForm(),
-  );
 }
