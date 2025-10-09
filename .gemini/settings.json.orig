@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "dart": {
+      "command": "dart",
+      "args": [
+        "mcp-server"
+      ]
+    }
+  },
+  "general": {
+    "preferredEditor": "vscode"
+  },
+  "preferredEditor": "vscode"
+}
