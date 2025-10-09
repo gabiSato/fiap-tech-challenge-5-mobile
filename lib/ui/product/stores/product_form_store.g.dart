@@ -307,7 +307,7 @@ mixin _$ProductFormStore on _ProductFormStore, Store {
   }
 
   @override
-  void validatePricePerUnit(String value) {
+  void validatePricePerUnit(String? value) {
     final _$actionInfo = _$_ProductFormStoreActionController.startAction(
       name: '_ProductFormStore.validatePricePerUnit',
     );

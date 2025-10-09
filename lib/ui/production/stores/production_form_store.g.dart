@@ -16,6 +16,13 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
     () => super.totalCost,
     name: '_ProductionFormStore.totalCost',
   )).value;
+  Computed<bool>? _$hasErrorsComputed;
+
+  @override
+  bool get hasErrors => (_$hasErrorsComputed ??= Computed<bool>(
+    () => super.hasErrors,
+    name: '_ProductionFormStore.hasErrors',
+  )).value;
 
   late final _$isLoadingAtom = Atom(
     name: '_ProductionFormStore.isLoading',
@@ -107,39 +114,39 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
     });
   }
 
-  late final _$quantityAtom = Atom(
-    name: '_ProductionFormStore.quantity',
+  late final _$quantityPlantedAtom = Atom(
+    name: '_ProductionFormStore.quantityPlanted',
     context: context,
   );
 
   @override
-  double? get quantity {
-    _$quantityAtom.reportRead();
-    return super.quantity;
+  String? get quantityPlanted {
+    _$quantityPlantedAtom.reportRead();
+    return super.quantityPlanted;
   }
 
   @override
-  set quantity(double? value) {
-    _$quantityAtom.reportWrite(value, super.quantity, () {
-      super.quantity = value;
+  set quantityPlanted(String? value) {
+    _$quantityPlantedAtom.reportWrite(value, super.quantityPlanted, () {
+      super.quantityPlanted = value;
     });
   }
 
-  late final _$harvestDateAtom = Atom(
-    name: '_ProductionFormStore.harvestDate',
+  late final _$expectedHarvestDateAtom = Atom(
+    name: '_ProductionFormStore.expectedHarvestDate',
     context: context,
   );
 
   @override
-  DateTime? get harvestDate {
-    _$harvestDateAtom.reportRead();
-    return super.harvestDate;
+  DateTime? get expectedHarvestDate {
+    _$expectedHarvestDateAtom.reportRead();
+    return super.expectedHarvestDate;
   }
 
   @override
-  set harvestDate(DateTime? value) {
-    _$harvestDateAtom.reportWrite(value, super.harvestDate, () {
-      super.harvestDate = value;
+  set expectedHarvestDate(DateTime? value) {
+    _$expectedHarvestDateAtom.reportWrite(value, super.expectedHarvestDate, () {
+      super.expectedHarvestDate = value;
     });
   }
 
@@ -149,13 +156,13 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
   );
 
   @override
-  double get seedCost {
+  String? get seedCost {
     _$seedCostAtom.reportRead();
     return super.seedCost;
   }
 
   @override
-  set seedCost(double value) {
+  set seedCost(String? value) {
     _$seedCostAtom.reportWrite(value, super.seedCost, () {
       super.seedCost = value;
     });
@@ -167,13 +174,13 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
   );
 
   @override
-  double get laborCost {
+  String? get laborCost {
     _$laborCostAtom.reportRead();
     return super.laborCost;
   }
 
   @override
-  set laborCost(double value) {
+  set laborCost(String? value) {
     _$laborCostAtom.reportWrite(value, super.laborCost, () {
       super.laborCost = value;
     });
@@ -185,13 +192,13 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
   );
 
   @override
-  double get fertilizerCost {
+  String? get fertilizerCost {
     _$fertilizerCostAtom.reportRead();
     return super.fertilizerCost;
   }
 
   @override
-  set fertilizerCost(double value) {
+  set fertilizerCost(String? value) {
     _$fertilizerCostAtom.reportWrite(value, super.fertilizerCost, () {
       super.fertilizerCost = value;
     });
@@ -203,13 +210,13 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
   );
 
   @override
-  double get irrigationCost {
+  String? get irrigationCost {
     _$irrigationCostAtom.reportRead();
     return super.irrigationCost;
   }
 
   @override
-  set irrigationCost(double value) {
+  set irrigationCost(String? value) {
     _$irrigationCostAtom.reportWrite(value, super.irrigationCost, () {
       super.irrigationCost = value;
     });
@@ -221,33 +228,33 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
   );
 
   @override
-  double get otherCosts {
+  String? get otherCosts {
     _$otherCostsAtom.reportRead();
     return super.otherCosts;
   }
 
   @override
-  set otherCosts(double value) {
+  set otherCosts(String? value) {
     _$otherCostsAtom.reportWrite(value, super.otherCosts, () {
       super.otherCosts = value;
     });
   }
 
-  late final _$plantedAreaAtom = Atom(
-    name: '_ProductionFormStore.plantedArea',
+  late final _$areaPlantedAtom = Atom(
+    name: '_ProductionFormStore.areaPlanted',
     context: context,
   );
 
   @override
-  double? get plantedArea {
-    _$plantedAreaAtom.reportRead();
-    return super.plantedArea;
+  String? get areaPlanted {
+    _$areaPlantedAtom.reportRead();
+    return super.areaPlanted;
   }
 
   @override
-  set plantedArea(double? value) {
-    _$plantedAreaAtom.reportWrite(value, super.plantedArea, () {
-      super.plantedArea = value;
+  set areaPlanted(String? value) {
+    _$areaPlantedAtom.reportWrite(value, super.areaPlanted, () {
+      super.areaPlanted = value;
     });
   }
 
@@ -269,39 +276,39 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
     });
   }
 
-  late final _$locationAtom = Atom(
-    name: '_ProductionFormStore.location',
+  late final _$plotLocationAtom = Atom(
+    name: '_ProductionFormStore.plotLocation',
     context: context,
   );
 
   @override
-  String? get location {
-    _$locationAtom.reportRead();
-    return super.location;
+  String? get plotLocation {
+    _$plotLocationAtom.reportRead();
+    return super.plotLocation;
   }
 
   @override
-  set location(String? value) {
-    _$locationAtom.reportWrite(value, super.location, () {
-      super.location = value;
+  set plotLocation(String? value) {
+    _$plotLocationAtom.reportWrite(value, super.plotLocation, () {
+      super.plotLocation = value;
     });
   }
 
-  late final _$cultivarAtom = Atom(
-    name: '_ProductionFormStore.cultivar',
+  late final _$varietyNameAtom = Atom(
+    name: '_ProductionFormStore.varietyName',
     context: context,
   );
 
   @override
-  String? get cultivar {
-    _$cultivarAtom.reportRead();
-    return super.cultivar;
+  String? get varietyName {
+    _$varietyNameAtom.reportRead();
+    return super.varietyName;
   }
 
   @override
-  set cultivar(String? value) {
-    _$cultivarAtom.reportWrite(value, super.cultivar, () {
-      super.cultivar = value;
+  set varietyName(String? value) {
+    _$varietyNameAtom.reportWrite(value, super.varietyName, () {
+      super.varietyName = value;
     });
   }
 
@@ -323,43 +330,119 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
     });
   }
 
-  late final _$expectedProductivityAtom = Atom(
-    name: '_ProductionFormStore.expectedProductivity',
+  late final _$expectedYieldPerAreaAtom = Atom(
+    name: '_ProductionFormStore.expectedYieldPerArea',
     context: context,
   );
 
   @override
-  double? get expectedProductivity {
-    _$expectedProductivityAtom.reportRead();
-    return super.expectedProductivity;
+  String? get expectedYieldPerArea {
+    _$expectedYieldPerAreaAtom.reportRead();
+    return super.expectedYieldPerArea;
   }
 
   @override
-  set expectedProductivity(double? value) {
-    _$expectedProductivityAtom.reportWrite(
+  set expectedYieldPerArea(String? value) {
+    _$expectedYieldPerAreaAtom.reportWrite(
       value,
-      super.expectedProductivity,
+      super.expectedYieldPerArea,
       () {
-        super.expectedProductivity = value;
+        super.expectedYieldPerArea = value;
       },
     );
   }
 
-  late final _$observationsAtom = Atom(
-    name: '_ProductionFormStore.observations',
+  late final _$notesAtom = Atom(
+    name: '_ProductionFormStore.notes',
     context: context,
   );
 
   @override
-  String? get observations {
-    _$observationsAtom.reportRead();
-    return super.observations;
+  String? get notes {
+    _$notesAtom.reportRead();
+    return super.notes;
   }
 
   @override
-  set observations(String? value) {
-    _$observationsAtom.reportWrite(value, super.observations, () {
-      super.observations = value;
+  set notes(String? value) {
+    _$notesAtom.reportWrite(value, super.notes, () {
+      super.notes = value;
+    });
+  }
+
+  late final _$productErrorAtom = Atom(
+    name: '_ProductionFormStore.productError',
+    context: context,
+  );
+
+  @override
+  String? get productError {
+    _$productErrorAtom.reportRead();
+    return super.productError;
+  }
+
+  @override
+  set productError(String? value) {
+    _$productErrorAtom.reportWrite(value, super.productError, () {
+      super.productError = value;
+    });
+  }
+
+  late final _$quantityErrorAtom = Atom(
+    name: '_ProductionFormStore.quantityError',
+    context: context,
+  );
+
+  @override
+  String? get quantityError {
+    _$quantityErrorAtom.reportRead();
+    return super.quantityError;
+  }
+
+  @override
+  set quantityError(String? value) {
+    _$quantityErrorAtom.reportWrite(value, super.quantityError, () {
+      super.quantityError = value;
+    });
+  }
+
+  late final _$expectedHarvestDateErrorAtom = Atom(
+    name: '_ProductionFormStore.expectedHarvestDateError',
+    context: context,
+  );
+
+  @override
+  String? get expectedHarvestDateError {
+    _$expectedHarvestDateErrorAtom.reportRead();
+    return super.expectedHarvestDateError;
+  }
+
+  @override
+  set expectedHarvestDateError(String? value) {
+    _$expectedHarvestDateErrorAtom.reportWrite(
+      value,
+      super.expectedHarvestDateError,
+      () {
+        super.expectedHarvestDateError = value;
+      },
+    );
+  }
+
+  late final _$areaPlantedErrorAtom = Atom(
+    name: '_ProductionFormStore.areaPlantedError',
+    context: context,
+  );
+
+  @override
+  String? get areaPlantedError {
+    _$areaPlantedErrorAtom.reportRead();
+    return super.areaPlantedError;
+  }
+
+  @override
+  set areaPlantedError(String? value) {
+    _$areaPlantedErrorAtom.reportWrite(value, super.areaPlantedError, () {
+      super.areaPlantedError = value;
     });
   }
 
@@ -401,24 +484,24 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
   }
 
   @override
-  void setQuantity(String value) {
+  void setQuantityPlanted(String value) {
     final _$actionInfo = _$_ProductionFormStoreActionController.startAction(
-      name: '_ProductionFormStore.setQuantity',
+      name: '_ProductionFormStore.setQuantityPlanted',
     );
     try {
-      return super.setQuantity(value);
+      return super.setQuantityPlanted(value);
     } finally {
       _$_ProductionFormStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setHarvestDate(DateTime? value) {
+  void setExpectedHarvestDate(DateTime? value) {
     final _$actionInfo = _$_ProductionFormStoreActionController.startAction(
-      name: '_ProductionFormStore.setHarvestDate',
+      name: '_ProductionFormStore.setExpectedHarvestDate',
     );
     try {
-      return super.setHarvestDate(value);
+      return super.setExpectedHarvestDate(value);
     } finally {
       _$_ProductionFormStoreActionController.endAction(_$actionInfo);
     }
@@ -485,12 +568,12 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
   }
 
   @override
-  void setPlantedArea(String value) {
+  void setAreaPlanted(String value) {
     final _$actionInfo = _$_ProductionFormStoreActionController.startAction(
-      name: '_ProductionFormStore.setPlantedArea',
+      name: '_ProductionFormStore.setAreaPlanted',
     );
     try {
-      return super.setPlantedArea(value);
+      return super.setAreaPlanted(value);
     } finally {
       _$_ProductionFormStoreActionController.endAction(_$actionInfo);
     }
@@ -509,24 +592,24 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
   }
 
   @override
-  void setLocation(String value) {
+  void setPlotLocation(String value) {
     final _$actionInfo = _$_ProductionFormStoreActionController.startAction(
-      name: '_ProductionFormStore.setLocation',
+      name: '_ProductionFormStore.setPlotLocation',
     );
     try {
-      return super.setLocation(value);
+      return super.setPlotLocation(value);
     } finally {
       _$_ProductionFormStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setCultivar(String value) {
+  void setVarietyName(String value) {
     final _$actionInfo = _$_ProductionFormStoreActionController.startAction(
-      name: '_ProductionFormStore.setCultivar',
+      name: '_ProductionFormStore.setVarietyName',
     );
     try {
-      return super.setCultivar(value);
+      return super.setVarietyName(value);
     } finally {
       _$_ProductionFormStoreActionController.endAction(_$actionInfo);
     }
@@ -545,24 +628,72 @@ mixin _$ProductionFormStore on _ProductionFormStore, Store {
   }
 
   @override
-  void setExpectedProductivity(String value) {
+  void setExpectedYieldPerArea(String value) {
     final _$actionInfo = _$_ProductionFormStoreActionController.startAction(
-      name: '_ProductionFormStore.setExpectedProductivity',
+      name: '_ProductionFormStore.setExpectedYieldPerArea',
     );
     try {
-      return super.setExpectedProductivity(value);
+      return super.setExpectedYieldPerArea(value);
     } finally {
       _$_ProductionFormStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setObservations(String value) {
+  void setNotes(String value) {
     final _$actionInfo = _$_ProductionFormStoreActionController.startAction(
-      name: '_ProductionFormStore.setObservations',
+      name: '_ProductionFormStore.setNotes',
     );
     try {
-      return super.setObservations(value);
+      return super.setNotes(value);
+    } finally {
+      _$_ProductionFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateProduct(ProductEntity? value) {
+    final _$actionInfo = _$_ProductionFormStoreActionController.startAction(
+      name: '_ProductionFormStore.validateProduct',
+    );
+    try {
+      return super.validateProduct(value);
+    } finally {
+      _$_ProductionFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateQuantity(String? value) {
+    final _$actionInfo = _$_ProductionFormStoreActionController.startAction(
+      name: '_ProductionFormStore.validateQuantity',
+    );
+    try {
+      return super.validateQuantity(value);
+    } finally {
+      _$_ProductionFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateExpectedHarvestDate(DateTime? value) {
+    final _$actionInfo = _$_ProductionFormStoreActionController.startAction(
+      name: '_ProductionFormStore.validateExpectedHarvestDate',
+    );
+    try {
+      return super.validateExpectedHarvestDate(value);
+    } finally {
+      _$_ProductionFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validatePlantedArea(String? value) {
+    final _$actionInfo = _$_ProductionFormStoreActionController.startAction(
+      name: '_ProductionFormStore.validatePlantedArea',
+    );
+    try {
+      return super.validatePlantedArea(value);
     } finally {
       _$_ProductionFormStoreActionController.endAction(_$actionInfo);
     }
@@ -576,21 +707,26 @@ errorMessage: ${errorMessage},
 isSaved: ${isSaved},
 products: ${products},
 product: ${product},
-quantity: ${quantity},
-harvestDate: ${harvestDate},
+quantityPlanted: ${quantityPlanted},
+expectedHarvestDate: ${expectedHarvestDate},
 seedCost: ${seedCost},
 laborCost: ${laborCost},
 fertilizerCost: ${fertilizerCost},
 irrigationCost: ${irrigationCost},
 otherCosts: ${otherCosts},
-plantedArea: ${plantedArea},
+areaPlanted: ${areaPlanted},
 areaUnit: ${areaUnit},
-location: ${location},
-cultivar: ${cultivar},
+plotLocation: ${plotLocation},
+varietyName: ${varietyName},
 sowingMethod: ${sowingMethod},
-expectedProductivity: ${expectedProductivity},
-observations: ${observations},
-totalCost: ${totalCost}
+expectedYieldPerArea: ${expectedYieldPerArea},
+notes: ${notes},
+productError: ${productError},
+quantityError: ${quantityError},
+expectedHarvestDateError: ${expectedHarvestDateError},
+areaPlantedError: ${areaPlantedError},
+totalCost: ${totalCost},
+hasErrors: ${hasErrors}
     ''';
   }
 }

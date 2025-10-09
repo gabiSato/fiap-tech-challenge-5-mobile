@@ -28,6 +28,12 @@ class _ProductionFormState extends State<ProductionForm> {
   }
 
   @override
+  void dispose() {
+    _store.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
@@ -80,12 +86,14 @@ class _ProductionFormState extends State<ProductionForm> {
           items: _store.products.map((product) {
             return DropdownMenuItem(value: product, child: Text(product.name));
           }).toList(),
+          errorText: _store.productError,
         ),
         const SizedBox(height: 24),
         AppTextField(
           labelText: 'Quantidade plantada',
           keyboardType: TextInputType.number,
-          onChanged: _store.setQuantity,
+          onChanged: _store.setQuantityPlanted,
+          errorText: _store.quantityError,
           suffix: _store.product?.unit.displayName != null
               ? Text(_store.product!.unit.displayName)
               : null,
@@ -93,8 +101,9 @@ class _ProductionFormState extends State<ProductionForm> {
         const SizedBox(height: 24),
         AppDatePicker(
           labelText: 'Data prevista de colheita',
-          onDateSelected: _store.setHarvestDate,
-          selectedDate: _store.harvestDate,
+          onDateSelected: _store.setExpectedHarvestDate,
+          selectedDate: _store.expectedHarvestDate,
+          errorText: _store.expectedHarvestDateError,
         ),
       ],
     );
@@ -134,11 +143,13 @@ class _ProductionFormState extends State<ProductionForm> {
           onChanged: _store.setOtherCosts,
         ),
         const SizedBox(height: 24),
-        AppCurrencyTextField(
+        AppTextField(
           labelText: 'Custo total',
-          initialValue: NumberFormat.simpleCurrency(
-            locale: 'pt_BR',
-          ).format(_store.totalCost),
+          controller: TextEditingController(
+            text: NumberFormat.simpleCurrency(
+              locale: 'pt_BR',
+            ).format(_store.totalCost),
+          ),
           readOnly: true,
         ),
       ],
@@ -157,7 +168,8 @@ class _ProductionFormState extends State<ProductionForm> {
         AppTextField(
           labelText: 'Área plantada',
           keyboardType: TextInputType.number,
-          onChanged: _store.setPlantedArea,
+          onChanged: _store.setAreaPlanted,
+          errorText: _store.areaPlantedError,
         ),
         const SizedBox(height: 24),
         AppDropdown<AreaUnit>(
@@ -172,7 +184,7 @@ class _ProductionFormState extends State<ProductionForm> {
         const SizedBox(height: 24),
         AppTextField(
           labelText: 'Localização do lote',
-          onChanged: _store.setLocation,
+          onChanged: _store.setPlotLocation,
         ),
       ],
     );
@@ -189,7 +201,7 @@ class _ProductionFormState extends State<ProductionForm> {
         const SizedBox(height: 24),
         AppTextField(
           labelText: 'Variedade cultivar',
-          onChanged: _store.setCultivar,
+          onChanged: _store.setVarietyName,
         ),
         const SizedBox(height: 24),
         AppDropdown<SowingMethod>(
@@ -208,13 +220,10 @@ class _ProductionFormState extends State<ProductionForm> {
         AppTextField(
           labelText: 'Produtividade esperada por área',
           keyboardType: TextInputType.number,
-          onChanged: _store.setExpectedProductivity,
+          onChanged: _store.setExpectedYieldPerArea,
         ),
         const SizedBox(height: 24),
-        AppTextField(
-          labelText: 'Observações',
-          onChanged: _store.setObservations,
-        ),
+        AppTextField(labelText: 'Observações', onChanged: _store.setNotes),
       ],
     );
   }

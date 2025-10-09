@@ -1,12 +1,15 @@
-import 'package:fiap_farms/utils/result.dart';
 import 'package:mobx/mobx.dart';
 
 import 'package:fiap_farms/domain/use_cases/auth/get_current_user_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/product/create_product_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/product/update_product_usecase.dart';
+
 import 'package:fiap_farms/domain/entities/product_entity.dart';
 import 'package:fiap_farms/domain/entities/user_entity.dart';
+
+import 'package:fiap_farms/utils/field_validators.dart';
 import 'package:fiap_farms/utils/parse_currency.dart';
+import 'package:fiap_farms/utils/result.dart';
 
 part 'product_form_store.g.dart';
 
@@ -119,31 +122,20 @@ abstract class _ProductFormStore with Store {
 
   @action
   void validateCategory(ProductCategory? value) {
-    if (value == null) {
-      categoryError = 'Categoria é obrigatória';
-    } else {
-      categoryError = null;
-    }
+    categoryError = FieldValidators.required(value?.name);
   }
 
   @action
   void validateUnit(ProductUnit? value) {
-    if (value == null) {
-      unitError = 'Unidade é obrigatória';
-    } else {
-      unitError = null;
-    }
+    unitError = FieldValidators.required(value?.name);
   }
 
   @action
-  void validatePricePerUnit(String value) {
-    print(value);
-    if (value.isEmpty) {
-      pricePerUnitError = 'Preço por unidade é obrigatório';
-    } else if (parseCurrency(value) == null) {
-      pricePerUnitError = 'Preço inválido';
-    } else {
-      pricePerUnitError = null;
+  void validatePricePerUnit(String? value) {
+    pricePerUnitError = FieldValidators.required(value);
+
+    if (value != null) {
+      pricePerUnitError = FieldValidators.number(value);
     }
   }
 
