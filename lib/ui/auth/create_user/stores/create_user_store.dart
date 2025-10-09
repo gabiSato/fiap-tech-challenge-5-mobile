@@ -143,10 +143,9 @@ abstract class CreateUserStoreBase with Store {
 
       final user = UserEntity(
         farmName: farmName,
-        ownerName: fullName,
+        name: fullName,
         email: email,
       );
-
       final result = await _createCredentialUseCase.call(
         email: email,
         password: password,
