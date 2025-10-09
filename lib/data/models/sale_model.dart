@@ -2,61 +2,134 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:fiap_farms/domain/entities/sale_entity.dart';
 
+import 'package:fiap_farms/data/models/sale_item_model.dart';
+
 class SaleModel {
   final String? id;
-  final String userId;
-  final String productId;
-  final DateTime saleDate;
-  final String clientName;
-  final int quantity;
-  final String unitOfMeasure;
-  final double costPrice;
-  final double unitPrice;
+  final String? userId;
+  final List<SaleItemModel> items;
   final double totalAmount;
+  final double totalCost;
   final double totalProfit;
+  final double profitMargin;
+  final String? customerName;
+  final String? customerContact;
+  final String? customerEmail;
+  final String? customerDocument;
+  final PaymentMethod? paymentMethod;
+  final bool isPaid;
+  final DateTime? paymentDate;
+  final String? deliveryAddress;
+  final DateTime? deliveryDate;
+  final double? deliveryFee;
+  final SaleStatus status;
+  final DateTime saleDate;
+  final String? notes;
+  final String? invoiceNumber;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   SaleModel({
-    required this.userId,
-    required this.productId,
-    required this.saleDate,
-    required this.clientName,
-    required this.quantity,
-    required this.unitOfMeasure,
-    required this.costPrice,
-    required this.unitPrice,
+    required this.items,
     required this.totalAmount,
+    required this.totalCost,
     required this.totalProfit,
+    required this.profitMargin,
+    required this.isPaid,
+    required this.status,
+    required this.saleDate,
     this.id,
+    this.userId,
+    this.customerName,
+    this.customerContact,
+    this.customerEmail,
+    this.customerDocument,
+    this.paymentMethod,
+    this.paymentDate,
+    this.deliveryAddress,
+    this.deliveryDate,
+    this.deliveryFee,
+    this.notes,
+    this.invoiceNumber,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory SaleModel.fromMap(Map<String, dynamic> map, String id) {
     return SaleModel(
       id: id,
-      userId: map['userId'] ?? '',
-      productId: map['productId'] ?? '',
-      saleDate: (map['saleDate'] as Timestamp).toDate(),
-      clientName: map['clientName'] ?? '',
-      quantity: map['quantity'] ?? 0,
-      unitOfMeasure: map['unitOfMeasure'] ?? '',
-      costPrice: (map['costPrice'] ?? 0).toDouble(),
-      unitPrice: (map['unitPrice'] ?? 0).toDouble(),
+      userId: map['userId'],
+      items:
+          (map['items'] as List<dynamic>?)
+              ?.map((item) => SaleItemModel.fromMap(item))
+              .toList() ??
+          [],
       totalAmount: (map['totalAmount'] ?? 0).toDouble(),
+      totalCost: (map['totalCost'] ?? 0).toDouble(),
       totalProfit: (map['totalProfit'] ?? 0).toDouble(),
+      profitMargin: (map['profitMargin'] ?? 0).toDouble(),
+      customerName: map['customerName'],
+      customerContact: map['customerContact'],
+      customerEmail: map['customerEmail'],
+      customerDocument: map['customerDocument'],
+      paymentMethod: map['paymentMethod'] != null
+          ? PaymentMethod.values.firstWhere(
+              (e) => e.name == map['paymentMethod'],
+            )
+          : null,
+      isPaid: map['isPaid'] ?? false,
+      paymentDate: map['paymentDate'] != null
+          ? (map['paymentDate'] as Timestamp).toDate()
+          : null,
+      deliveryAddress: map['deliveryAddress'],
+      deliveryDate: map['deliveryDate'] != null
+          ? (map['deliveryDate'] as Timestamp).toDate()
+          : null,
+      deliveryFee: map['deliveryFee']?.toDouble(),
+      status: SaleStatus.values.firstWhere(
+        (e) => e.name == map['status'],
+        orElse: () => SaleStatus.pending,
+      ),
+      saleDate: (map['saleDate'] as Timestamp).toDate(),
+      notes: map['notes'],
+      invoiceNumber: map['invoiceNumber'],
+      createdAt: map['createdAt'] != null
+          ? (map['createdAt'] as Timestamp).toDate()
+          : null,
+      updatedAt: map['updatedAt'] != null
+          ? (map['updatedAt'] as Timestamp).toDate()
+          : null,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'userId': userId,
-      'productId': productId,
-      'saleDate': saleDate,
-      'clientName': clientName,
-      'quantity': quantity,
-      'unitOfMeasure': unitOfMeasure,
-      'costPrice': costPrice,
-      'unitPrice': unitPrice,
+      'items': items.map((item) => item.toMap()).toList(),
       'totalAmount': totalAmount,
+      'totalCost': totalCost,
       'totalProfit': totalProfit,
+      'profitMargin': profitMargin,
+      'customerName': customerName,
+      'customerContact': customerContact,
+      'customerEmail': customerEmail,
+      'customerDocument': customerDocument,
+      'paymentMethod': paymentMethod?.name,
+      'isPaid': isPaid,
+      'paymentDate': paymentDate != null
+          ? Timestamp.fromDate(paymentDate!)
+          : null,
+      'deliveryAddress': deliveryAddress,
+      'deliveryDate': deliveryDate != null
+          ? Timestamp.fromDate(deliveryDate!)
+          : null,
+      'deliveryFee': deliveryFee,
+      'status': status.name,
+      'saleDate': Timestamp.fromDate(saleDate),
+      'notes': notes,
+      'invoiceNumber': invoiceNumber,
+      'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : null,
+      'updatedAt': updatedAt != null ? Timestamp.fromDate(updatedAt!) : null,
     };
   }
 
@@ -64,15 +137,27 @@ class SaleModel {
     return SaleEntity(
       id: id,
       userId: userId,
-      productId: productId,
-      saleDate: saleDate,
-      clientName: clientName,
-      quantity: quantity,
-      unitOfMeasure: unitOfMeasure,
-      costPrice: costPrice,
-      unitPrice: unitPrice,
+      items: items.map((item) => item.toEntity()).toList(),
       totalAmount: totalAmount,
+      totalCost: totalCost,
       totalProfit: totalProfit,
+      profitMargin: profitMargin,
+      customerName: customerName,
+      customerContact: customerContact,
+      customerEmail: customerEmail,
+      customerDocument: customerDocument,
+      paymentMethod: paymentMethod,
+      isPaid: isPaid,
+      paymentDate: paymentDate,
+      deliveryAddress: deliveryAddress,
+      deliveryDate: deliveryDate,
+      deliveryFee: deliveryFee,
+      status: status,
+      saleDate: saleDate,
+      notes: notes,
+      invoiceNumber: invoiceNumber,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
     );
   }
 
@@ -80,15 +165,27 @@ class SaleModel {
     return SaleModel(
       id: sale.id,
       userId: sale.userId,
-      productId: sale.productId,
-      saleDate: sale.saleDate,
-      clientName: sale.clientName,
-      quantity: sale.quantity,
-      unitOfMeasure: sale.unitOfMeasure,
-      costPrice: sale.costPrice,
-      unitPrice: sale.unitPrice,
+      items: sale.items.map(SaleItemModel.fromEntity).toList(),
       totalAmount: sale.totalAmount,
+      totalCost: sale.totalCost,
       totalProfit: sale.totalProfit,
+      profitMargin: sale.profitMargin,
+      customerName: sale.customerName,
+      customerContact: sale.customerContact,
+      customerEmail: sale.customerEmail,
+      customerDocument: sale.customerDocument,
+      paymentMethod: sale.paymentMethod,
+      isPaid: sale.isPaid,
+      paymentDate: sale.paymentDate,
+      deliveryAddress: sale.deliveryAddress,
+      deliveryDate: sale.deliveryDate,
+      deliveryFee: sale.deliveryFee,
+      status: sale.status,
+      saleDate: sale.saleDate,
+      notes: sale.notes,
+      invoiceNumber: sale.invoiceNumber,
+      createdAt: sale.createdAt,
+      updatedAt: sale.updatedAt,
     );
   }
 }
