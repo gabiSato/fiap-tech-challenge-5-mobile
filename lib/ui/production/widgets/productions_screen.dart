@@ -93,10 +93,12 @@ class _ProductionsScreenState extends State<ProductionsScreen> {
 
               String buildDateString() {
                 String start = dateFormat.format(production.plantingDate);
-                if (production.actualHarvestDate != null) {
-                  return '$start - ${dateFormat.format(production.actualHarvestDate!)}';
-                }
-                return start;
+                String end = dateFormat.format(
+                  production.actualHarvestDate ??
+                      production.expectedHarvestDate,
+                );
+
+                return '$start - $end';
               }
 
               String buildQuantityString() {
@@ -158,12 +160,15 @@ class _ProductionsScreenState extends State<ProductionsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await FullScreenDialog.show(
+          final result = await FullScreenDialog.show<bool>(
             context,
             title: 'Novo Plantio',
             child: ProductionForm(),
           );
-          store.fetchProductions();
+
+          if (result == true) {
+            store.fetchProductions();
+          }
         },
         child: const Icon(Icons.add),
       ),
