@@ -168,6 +168,7 @@ class MaterialTheme {
       style: FilledButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         textStyle: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       ),
     ),
 
