@@ -9,42 +9,6 @@ part of 'product_form_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ProductFormStore on _ProductFormStore, Store {
-  late final _$nameAtom = Atom(
-    name: '_ProductFormStore.name',
-    context: context,
-  );
-
-  @override
-  String get name {
-    _$nameAtom.reportRead();
-    return super.name;
-  }
-
-  @override
-  set name(String value) {
-    _$nameAtom.reportWrite(value, super.name, () {
-      super.name = value;
-    });
-  }
-
-  late final _$unitOfMeasureAtom = Atom(
-    name: '_ProductFormStore.unitOfMeasure',
-    context: context,
-  );
-
-  @override
-  String get unitOfMeasure {
-    _$unitOfMeasureAtom.reportRead();
-    return super.unitOfMeasure;
-  }
-
-  @override
-  set unitOfMeasure(String value) {
-    _$unitOfMeasureAtom.reportWrite(value, super.unitOfMeasure, () {
-      super.unitOfMeasure = value;
-    });
-  }
-
   late final _$isLoadingAtom = Atom(
     name: '_ProductFormStore.isLoading',
     context: context,
@@ -78,6 +42,96 @@ mixin _$ProductFormStore on _ProductFormStore, Store {
   set errorMessage(String? value) {
     _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
       super.errorMessage = value;
+    });
+  }
+
+  late final _$nameAtom = Atom(
+    name: '_ProductFormStore.name',
+    context: context,
+  );
+
+  @override
+  String get name {
+    _$nameAtom.reportRead();
+    return super.name;
+  }
+
+  @override
+  set name(String value) {
+    _$nameAtom.reportWrite(value, super.name, () {
+      super.name = value;
+    });
+  }
+
+  late final _$categoryAtom = Atom(
+    name: '_ProductFormStore.category',
+    context: context,
+  );
+
+  @override
+  ProductCategory? get category {
+    _$categoryAtom.reportRead();
+    return super.category;
+  }
+
+  @override
+  set category(ProductCategory? value) {
+    _$categoryAtom.reportWrite(value, super.category, () {
+      super.category = value;
+    });
+  }
+
+  late final _$unitAtom = Atom(
+    name: '_ProductFormStore.unit',
+    context: context,
+  );
+
+  @override
+  ProductUnit? get unit {
+    _$unitAtom.reportRead();
+    return super.unit;
+  }
+
+  @override
+  set unit(ProductUnit? value) {
+    _$unitAtom.reportWrite(value, super.unit, () {
+      super.unit = value;
+    });
+  }
+
+  late final _$pricePerUnitAtom = Atom(
+    name: '_ProductFormStore.pricePerUnit',
+    context: context,
+  );
+
+  @override
+  String get pricePerUnit {
+    _$pricePerUnitAtom.reportRead();
+    return super.pricePerUnit;
+  }
+
+  @override
+  set pricePerUnit(String value) {
+    _$pricePerUnitAtom.reportWrite(value, super.pricePerUnit, () {
+      super.pricePerUnit = value;
+    });
+  }
+
+  late final _$currentStockAtom = Atom(
+    name: '_ProductFormStore.currentStock',
+    context: context,
+  );
+
+  @override
+  String get currentStock {
+    _$currentStockAtom.reportRead();
+    return super.currentStock;
+  }
+
+  @override
+  set currentStock(String value) {
+    _$currentStockAtom.reportWrite(value, super.currentStock, () {
+      super.currentStock = value;
     });
   }
 
@@ -117,21 +171,75 @@ mixin _$ProductFormStore on _ProductFormStore, Store {
     });
   }
 
-  late final _$unitOfMeasureErrorAtom = Atom(
-    name: '_ProductFormStore.unitOfMeasureError',
+  late final _$categoryErrorAtom = Atom(
+    name: '_ProductFormStore.categoryError',
     context: context,
   );
 
   @override
-  String? get unitOfMeasureError {
-    _$unitOfMeasureErrorAtom.reportRead();
-    return super.unitOfMeasureError;
+  String? get categoryError {
+    _$categoryErrorAtom.reportRead();
+    return super.categoryError;
   }
 
   @override
-  set unitOfMeasureError(String? value) {
-    _$unitOfMeasureErrorAtom.reportWrite(value, super.unitOfMeasureError, () {
-      super.unitOfMeasureError = value;
+  set categoryError(String? value) {
+    _$categoryErrorAtom.reportWrite(value, super.categoryError, () {
+      super.categoryError = value;
+    });
+  }
+
+  late final _$unitErrorAtom = Atom(
+    name: '_ProductFormStore.unitError',
+    context: context,
+  );
+
+  @override
+  String? get unitError {
+    _$unitErrorAtom.reportRead();
+    return super.unitError;
+  }
+
+  @override
+  set unitError(String? value) {
+    _$unitErrorAtom.reportWrite(value, super.unitError, () {
+      super.unitError = value;
+    });
+  }
+
+  late final _$pricePerUnitErrorAtom = Atom(
+    name: '_ProductFormStore.pricePerUnitError',
+    context: context,
+  );
+
+  @override
+  String? get pricePerUnitError {
+    _$pricePerUnitErrorAtom.reportRead();
+    return super.pricePerUnitError;
+  }
+
+  @override
+  set pricePerUnitError(String? value) {
+    _$pricePerUnitErrorAtom.reportWrite(value, super.pricePerUnitError, () {
+      super.pricePerUnitError = value;
+    });
+  }
+
+  late final _$currentStockErrorAtom = Atom(
+    name: '_ProductFormStore.currentStockError',
+    context: context,
+  );
+
+  @override
+  String? get currentStockError {
+    _$currentStockErrorAtom.reportRead();
+    return super.currentStockError;
+  }
+
+  @override
+  set currentStockError(String? value) {
+    _$currentStockErrorAtom.reportWrite(value, super.currentStockError, () {
+      super.currentStockError = value;
     });
   }
 
@@ -163,12 +271,48 @@ mixin _$ProductFormStore on _ProductFormStore, Store {
   }
 
   @override
-  void setUnitOfMeasure(String value) {
+  void setCategory(ProductCategory? value) {
     final _$actionInfo = _$_ProductFormStoreActionController.startAction(
-      name: '_ProductFormStore.setUnitOfMeasure',
+      name: '_ProductFormStore.setCategory',
     );
     try {
-      return super.setUnitOfMeasure(value);
+      return super.setCategory(value);
+    } finally {
+      _$_ProductFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setUnit(ProductUnit? value) {
+    final _$actionInfo = _$_ProductFormStoreActionController.startAction(
+      name: '_ProductFormStore.setUnit',
+    );
+    try {
+      return super.setUnit(value);
+    } finally {
+      _$_ProductFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setPricePerUnit(String value) {
+    final _$actionInfo = _$_ProductFormStoreActionController.startAction(
+      name: '_ProductFormStore.setPricePerUnit',
+    );
+    try {
+      return super.setPricePerUnit(value);
+    } finally {
+      _$_ProductFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setCurrentStock(String value) {
+    final _$actionInfo = _$_ProductFormStoreActionController.startAction(
+      name: '_ProductFormStore.setCurrentStock',
+    );
+    try {
+      return super.setCurrentStock(value);
     } finally {
       _$_ProductFormStoreActionController.endAction(_$actionInfo);
     }
@@ -187,12 +331,48 @@ mixin _$ProductFormStore on _ProductFormStore, Store {
   }
 
   @override
-  void validateUnitOfMeasure(String value) {
+  void validateCategory(ProductCategory? value) {
     final _$actionInfo = _$_ProductFormStoreActionController.startAction(
-      name: '_ProductFormStore.validateUnitOfMeasure',
+      name: '_ProductFormStore.validateCategory',
     );
     try {
-      return super.validateUnitOfMeasure(value);
+      return super.validateCategory(value);
+    } finally {
+      _$_ProductFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateUnit(ProductUnit? value) {
+    final _$actionInfo = _$_ProductFormStoreActionController.startAction(
+      name: '_ProductFormStore.validateUnit',
+    );
+    try {
+      return super.validateUnit(value);
+    } finally {
+      _$_ProductFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validatePricePerUnit(String value) {
+    final _$actionInfo = _$_ProductFormStoreActionController.startAction(
+      name: '_ProductFormStore.validatePricePerUnit',
+    );
+    try {
+      return super.validatePricePerUnit(value);
+    } finally {
+      _$_ProductFormStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateCurrentStock(String value) {
+    final _$actionInfo = _$_ProductFormStoreActionController.startAction(
+      name: '_ProductFormStore.validateCurrentStock',
+    );
+    try {
+      return super.validateCurrentStock(value);
     } finally {
       _$_ProductFormStoreActionController.endAction(_$actionInfo);
     }
@@ -213,13 +393,19 @@ mixin _$ProductFormStore on _ProductFormStore, Store {
   @override
   String toString() {
     return '''
-name: ${name},
-unitOfMeasure: ${unitOfMeasure},
 isLoading: ${isLoading},
 errorMessage: ${errorMessage},
+name: ${name},
+category: ${category},
+unit: ${unit},
+pricePerUnit: ${pricePerUnit},
+currentStock: ${currentStock},
 isSaved: ${isSaved},
 nameError: ${nameError},
-unitOfMeasureError: ${unitOfMeasureError}
+categoryError: ${categoryError},
+unitError: ${unitError},
+pricePerUnitError: ${pricePerUnitError},
+currentStockError: ${currentStockError}
     ''';
   }
 }

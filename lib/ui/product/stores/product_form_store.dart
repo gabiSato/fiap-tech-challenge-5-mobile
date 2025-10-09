@@ -34,7 +34,16 @@ abstract class _ProductFormStore with Store {
   String name = '';
 
   @observable
-  String unitOfMeasure = '';
+  ProductCategory? category;
+
+  @observable
+  ProductUnit? unit;
+
+  @observable
+  String pricePerUnit = '';
+
+  @observable
+  String currentStock = '';
 
   @observable
   bool isSaved = false;
@@ -43,7 +52,16 @@ abstract class _ProductFormStore with Store {
   String? nameError;
 
   @observable
-  String? unitOfMeasureError;
+  String? categoryError;
+
+  @observable
+  String? unitError;
+
+  @observable
+  String? pricePerUnitError;
+
+  @observable
+  String? currentStockError;
 
   ProductEntity? _product;
   late List<ReactionDisposer> _disposers;
@@ -55,9 +73,24 @@ abstract class _ProductFormStore with Store {
           validateName(value);
         }
       }),
-      reaction((_) => unitOfMeasure, (value) {
-        if (unitOfMeasureError != null) {
-          validateUnitOfMeasure(value);
+      reaction((_) => category, (value) {
+        if (categoryError != null) {
+          validateCategory(value);
+        }
+      }),
+      reaction((_) => unit, (value) {
+        if (unitError != null) {
+          validateUnit(value);
+        }
+      }),
+      reaction((_) => pricePerUnit, (value) {
+        if (pricePerUnitError != null) {
+          validatePricePerUnit(value);
+        }
+      }),
+      reaction((_) => currentStock, (value) {
+        if (currentStockError != null) {
+          validateCurrentStock(value);
         }
       }),
     ];
@@ -67,7 +100,10 @@ abstract class _ProductFormStore with Store {
     _product = product;
     if (product != null) {
       name = product.name;
-      unitOfMeasure = product.unitOfMeasure;
+      category = product.category;
+      unit = product.unit;
+      pricePerUnit = product.pricePerUnit.toString();
+      currentStock = product.currentStock.toString();
     }
   }
 
@@ -75,7 +111,16 @@ abstract class _ProductFormStore with Store {
   void setName(String value) => name = value;
 
   @action
-  void setUnitOfMeasure(String value) => unitOfMeasure = value;
+  void setCategory(ProductCategory? value) => category = value;
+
+  @action
+  void setUnit(ProductUnit? value) => unit = value;
+
+  @action
+  void setPricePerUnit(String value) => pricePerUnit = value;
+
+  @action
+  void setCurrentStock(String value) => currentStock = value;
 
   @action
   void validateName(String value) {
@@ -87,20 +132,58 @@ abstract class _ProductFormStore with Store {
   }
 
   @action
-  void validateUnitOfMeasure(String value) {
-    if (value.isEmpty) {
-      unitOfMeasureError = 'Unidade de medida é obrigatória';
+  void validateCategory(ProductCategory? value) {
+    if (value == null) {
+      categoryError = 'Categoria é obrigatória';
     } else {
-      unitOfMeasureError = null;
+      categoryError = null;
+    }
+  }
+
+  @action
+  void validateUnit(ProductUnit? value) {
+    if (value == null) {
+      unitError = 'Unidade é obrigatória';
+    } else {
+      unitError = null;
+    }
+  }
+
+  @action
+  void validatePricePerUnit(String value) {
+    if (value.isEmpty) {
+      pricePerUnitError = 'Preço por unidade é obrigatório';
+    } else if (double.tryParse(value) == null) {
+      pricePerUnitError = 'Preço inválido';
+    } else {
+      pricePerUnitError = null;
+    }
+  }
+
+  @action
+  void validateCurrentStock(String value) {
+    if (value.isEmpty) {
+      currentStockError = 'Estoque atual é obrigatório';
+    } else if (double.tryParse(value) == null) {
+      currentStockError = 'Estoque inválido';
+    } else {
+      currentStockError = null;
     }
   }
 
   @action
   bool validateAll() {
     validateName(name);
-    validateUnitOfMeasure(unitOfMeasure);
+    validateCategory(category);
+    validateUnit(unit);
+    validatePricePerUnit(pricePerUnit);
+    validateCurrentStock(currentStock);
 
-    return nameError == null && unitOfMeasureError == null;
+    return nameError == null &&
+        categoryError == null &&
+        unitError == null &&
+        pricePerUnitError == null &&
+        currentStockError == null;
   }
 
   @action
@@ -134,8 +217,10 @@ abstract class _ProductFormStore with Store {
         id: _product?.id,
         userId: user.id!,
         name: name,
-        unitOfMeasure: unitOfMeasure,
-        quantity: _product == null ? 0.0 : _product!.quantity,
+        category: category!,
+        unit: unit!,
+        pricePerUnit: double.parse(pricePerUnit),
+        currentStock: double.parse(currentStock),
       );
 
       final result = _product == null

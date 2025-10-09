@@ -44,7 +44,7 @@ class ProductList extends StatelessWidget {
 
             return ListTile(
               title: Text(product.name),
-              subtitle: Text(product.unitOfMeasure),
+              subtitle: Text('Categoria: ${product.category.name} | Preço: R\$${product.pricePerUnit.toStringAsFixed(2)} / ${product.unit.name}'),
               trailing: IconButton(
                 onPressed: () async {
                   await showDialog(

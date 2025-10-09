@@ -103,9 +103,9 @@ class _ProductionsScreenState extends State<ProductionsScreen> {
                   production.quantityPlanted,
                 );
                 if (production.quantityHarvested != null) {
-                  return '$planted / ${numberFormat.format(production.quantityHarvested!)} ${product?.unitOfMeasure}';
+                  return '$planted / ${numberFormat.format(production.quantityHarvested!)} ${product?.unit.name}';
                 }
-                return '$planted ${product?.unitOfMeasure}';
+                return '$planted ${product?.unit.name}';
               }
 
               return ListTile(

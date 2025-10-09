@@ -35,7 +35,7 @@ class ProductServiceImpl implements ProductService {
 
       return Result.ok(ProductModel.fromMap(productDoc.data()!, productDoc.id));
     } on Exception catch (error) {
-      return (Result.error(error));
+      return Result.error(error);
     }
   }
 
@@ -75,7 +75,7 @@ class ProductServiceImpl implements ProductService {
       await _firestore
           .collection(FirestoreCollections.products)
           .doc(productId)
-          .update({'quantity': FieldValue.increment(productQuantity)});
+          .update({'currentStock': FieldValue.increment(productQuantity)});
 
       return Result.ok(null);
     } on Exception catch (error) {

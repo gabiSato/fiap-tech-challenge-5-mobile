@@ -67,13 +67,54 @@ class _ProductFormState extends State<ProductForm> {
                   onChanged: _store.setName,
                 ),
                 const SizedBox(height: 16),
-                TextFormField(
-                  initialValue: _store.unitOfMeasure,
+                DropdownButtonFormField<ProductCategory>(
+                  initialValue: _store.category,
                   decoration: InputDecoration(
-                    labelText: "Unidade de medida",
-                    errorText: _store.unitOfMeasureError,
+                    labelText: 'Categoria',
+                    errorText: _store.categoryError,
                   ),
-                  onChanged: _store.setUnitOfMeasure,
+                  items: ProductCategory.values.map((category) {
+                    return DropdownMenuItem(
+                      value: category,
+                      child: Text(category.name),
+                    );
+                  }).toList(),
+                  onChanged: _store.setCategory,
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<ProductUnit>(
+                  initialValue: _store.unit,
+                  decoration: InputDecoration(
+                    labelText: 'Unidade',
+                    errorText: _store.unitError,
+                  ),
+                  items: ProductUnit.values.map((unit) {
+                    return DropdownMenuItem(
+                      value: unit,
+                      child: Text(unit.name),
+                    );
+                  }).toList(),
+                  onChanged: _store.setUnit,
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  initialValue: _store.pricePerUnit,
+                  decoration: InputDecoration(
+                    labelText: "Preço por unidade",
+                    errorText: _store.pricePerUnitError,
+                  ),
+                  keyboardType: TextInputType.number,
+                  onChanged: _store.setPricePerUnit,
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  initialValue: _store.currentStock,
+                  decoration: InputDecoration(
+                    labelText: "Estoque atual",
+                    errorText: _store.currentStockError,
+                  ),
+                  keyboardType: TextInputType.number,
+                  onChanged: _store.setCurrentStock,
                 ),
                 const SizedBox(height: 32),
                 ElevatedButton(
