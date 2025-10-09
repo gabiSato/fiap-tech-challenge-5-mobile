@@ -87,11 +87,10 @@ class _ProductFormState extends State<ProductForm> {
                   onChanged: _store.setUnit,
                 ),
                 const SizedBox(height: 16),
-                AppTextField(
+                AppCurrencyTextField(
                   controller: TextEditingController(text: _store.pricePerUnit),
                   labelText: "Preço por unidade",
                   errorText: _store.pricePerUnitError,
-                  keyboardType: TextInputType.number,
                   onChanged: _store.setPricePerUnit,
                 ),
                 const SizedBox(height: 16),
