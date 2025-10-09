@@ -1,3 +1,4 @@
+import 'package:fiap_farms/ui/core/widgets/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +31,7 @@ class _ProductFormState extends State<ProductForm> {
         title: Text(widget.product == null ? 'Novo Produto' : 'Editar Produto'),
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
-          icon: Icon(Icons.close),
+          icon: const Icon(Icons.close),
         ),
       ),
       body: Observer(
@@ -43,12 +44,7 @@ class _ProductFormState extends State<ProductForm> {
 
           if (_store.errorMessage != null) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(_store.errorMessage!),
-                  backgroundColor: Colors.red,
-                ),
-              );
+              showErrorSnackBar(context, _store.errorMessage!);
               _store.errorMessage = null;
             });
           }
@@ -58,21 +54,17 @@ class _ProductFormState extends State<ProductForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                TextFormField(
-                  initialValue: _store.name,
-                  decoration: InputDecoration(
-                    labelText: "Nome do produto",
-                    errorText: _store.nameError,
-                  ),
+                AppTextField(
+                  controller: TextEditingController(text: _store.name),
+                  labelText: "Nome do produto",
+                  errorText: _store.nameError,
                   onChanged: _store.setName,
                 ),
                 const SizedBox(height: 16),
-                DropdownButtonFormField<ProductCategory>(
-                  initialValue: _store.category,
-                  decoration: InputDecoration(
-                    labelText: 'Categoria',
-                    errorText: _store.categoryError,
-                  ),
+                AppDropdown<ProductCategory>(
+                  value: _store.category,
+                  labelText: 'Categoria',
+                  hintText: _store.categoryError,
                   items: ProductCategory.values.map((category) {
                     return DropdownMenuItem(
                       value: category,
@@ -82,12 +74,10 @@ class _ProductFormState extends State<ProductForm> {
                   onChanged: _store.setCategory,
                 ),
                 const SizedBox(height: 16),
-                DropdownButtonFormField<ProductUnit>(
-                  initialValue: _store.unit,
-                  decoration: InputDecoration(
-                    labelText: 'Unidade',
-                    errorText: _store.unitError,
-                  ),
+                AppDropdown<ProductUnit>(
+                  value: _store.unit,
+                  labelText: 'Unidade',
+                  hintText: _store.unitError,
                   items: ProductUnit.values.map((unit) {
                     return DropdownMenuItem(
                       value: unit,
@@ -97,36 +87,26 @@ class _ProductFormState extends State<ProductForm> {
                   onChanged: _store.setUnit,
                 ),
                 const SizedBox(height: 16),
-                TextFormField(
-                  initialValue: _store.pricePerUnit,
-                  decoration: InputDecoration(
-                    labelText: "Preço por unidade",
-                    errorText: _store.pricePerUnitError,
-                  ),
+                AppTextField(
+                  controller: TextEditingController(text: _store.pricePerUnit),
+                  labelText: "Preço por unidade",
+                  errorText: _store.pricePerUnitError,
                   keyboardType: TextInputType.number,
                   onChanged: _store.setPricePerUnit,
                 ),
                 const SizedBox(height: 16),
-                TextFormField(
-                  initialValue: _store.currentStock,
-                  decoration: InputDecoration(
-                    labelText: "Estoque atual",
-                    errorText: _store.currentStockError,
-                  ),
+                AppTextField(
+                  controller: TextEditingController(text: _store.currentStock),
+                  labelText: "Estoque atual",
+                  errorText: _store.currentStockError,
                   keyboardType: TextInputType.number,
                   onChanged: _store.setCurrentStock,
                 ),
                 const SizedBox(height: 32),
-                ElevatedButton(
-                  onPressed: !_store.isLoading ? _store.saveProduct : null,
-                  child: _store.isLoading
-                      ? const CircularProgressIndicator(
-                          constraints: BoxConstraints.tightFor(
-                            width: 24,
-                            height: 24,
-                          ),
-                        )
-                      : const Text('Salvar'),
+                SubmitButton(
+                  onPressed: _store.saveProduct,
+                  text: 'Salvar',
+                  isLoading: _store.isLoading,
                 ),
               ],
             ),

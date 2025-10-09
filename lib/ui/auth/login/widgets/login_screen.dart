@@ -1,3 +1,4 @@
+import 'package:fiap_farms/ui/core/widgets/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     reaction((_) => _store.errorMessage, (String? message) {
       if (message != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(message), backgroundColor: Colors.red),
-        );
+        showErrorSnackBar(context, message);
       }
     });
   }
@@ -62,36 +61,24 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 48),
-                    TextFormField(
+                    AppTextField(
                       onChanged: _store.setEmail,
-                      decoration: InputDecoration(
-                        labelText: 'E-mail',
-                        errorText: _store.emailError,
-                      ),
+                      labelText: 'E-mail',
+                      errorText: _store.emailError,
                       keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(height: 24),
-                    TextFormField(
+                    AppTextField(
                       onChanged: _store.setPassword,
-                      decoration: InputDecoration(
-                        labelText: 'Senha',
-                        errorText: _store.passwordError,
-                      ),
+                      labelText: 'Senha',
+                      errorText: _store.passwordError,
                       obscureText: true,
-                      textInputAction: TextInputAction.done,
                     ),
                     const SizedBox(height: 32),
-                    FilledButton(
-                      onPressed: !_store.isLoading ? _store.login : null,
-                      child: _store.isLoading
-                          ? const CircularProgressIndicator(
-                              constraints: BoxConstraints.tightFor(
-                                width: 24,
-                                height: 24,
-                              ),
-                            )
-                          : const Text('Entrar'),
+                    SubmitButton(
+                      onPressed: _store.login,
+                      text: 'Entrar',
+                      isLoading: _store.isLoading,
                     ),
                     const SizedBox(height: 32),
                     Row(
