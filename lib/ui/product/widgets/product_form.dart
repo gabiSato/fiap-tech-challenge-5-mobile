@@ -82,14 +82,6 @@ class _ProductFormState extends State<ProductForm> {
                 errorText: _store.pricePerUnitError,
                 onChanged: _store.setPricePerUnit,
               ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: TextEditingController(text: _store.currentStock),
-                labelText: "Estoque atual",
-                errorText: _store.currentStockError,
-                keyboardType: TextInputType.number,
-                onChanged: _store.setCurrentStock,
-              ),
               const SizedBox(height: 32),
               SubmitButton(
                 onPressed: _store.saveProduct,

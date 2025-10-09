@@ -117,24 +117,6 @@ mixin _$ProductFormStore on _ProductFormStore, Store {
     });
   }
 
-  late final _$currentStockAtom = Atom(
-    name: '_ProductFormStore.currentStock',
-    context: context,
-  );
-
-  @override
-  String get currentStock {
-    _$currentStockAtom.reportRead();
-    return super.currentStock;
-  }
-
-  @override
-  set currentStock(String value) {
-    _$currentStockAtom.reportWrite(value, super.currentStock, () {
-      super.currentStock = value;
-    });
-  }
-
   late final _$isSavedAtom = Atom(
     name: '_ProductFormStore.isSaved',
     context: context,
@@ -225,24 +207,6 @@ mixin _$ProductFormStore on _ProductFormStore, Store {
     });
   }
 
-  late final _$currentStockErrorAtom = Atom(
-    name: '_ProductFormStore.currentStockError',
-    context: context,
-  );
-
-  @override
-  String? get currentStockError {
-    _$currentStockErrorAtom.reportRead();
-    return super.currentStockError;
-  }
-
-  @override
-  set currentStockError(String? value) {
-    _$currentStockErrorAtom.reportWrite(value, super.currentStockError, () {
-      super.currentStockError = value;
-    });
-  }
-
   late final _$saveProductAsyncAction = AsyncAction(
     '_ProductFormStore.saveProduct',
     context: context,
@@ -307,18 +271,6 @@ mixin _$ProductFormStore on _ProductFormStore, Store {
   }
 
   @override
-  void setCurrentStock(String value) {
-    final _$actionInfo = _$_ProductFormStoreActionController.startAction(
-      name: '_ProductFormStore.setCurrentStock',
-    );
-    try {
-      return super.setCurrentStock(value);
-    } finally {
-      _$_ProductFormStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void validateName(String value) {
     final _$actionInfo = _$_ProductFormStoreActionController.startAction(
       name: '_ProductFormStore.validateName',
@@ -367,18 +319,6 @@ mixin _$ProductFormStore on _ProductFormStore, Store {
   }
 
   @override
-  void validateCurrentStock(String value) {
-    final _$actionInfo = _$_ProductFormStoreActionController.startAction(
-      name: '_ProductFormStore.validateCurrentStock',
-    );
-    try {
-      return super.validateCurrentStock(value);
-    } finally {
-      _$_ProductFormStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   bool validateAll() {
     final _$actionInfo = _$_ProductFormStoreActionController.startAction(
       name: '_ProductFormStore.validateAll',
@@ -399,13 +339,11 @@ name: ${name},
 category: ${category},
 unit: ${unit},
 pricePerUnit: ${pricePerUnit},
-currentStock: ${currentStock},
 isSaved: ${isSaved},
 nameError: ${nameError},
 categoryError: ${categoryError},
 unitError: ${unitError},
-pricePerUnitError: ${pricePerUnitError},
-currentStockError: ${currentStockError}
+pricePerUnitError: ${pricePerUnitError}
     ''';
   }
 }
