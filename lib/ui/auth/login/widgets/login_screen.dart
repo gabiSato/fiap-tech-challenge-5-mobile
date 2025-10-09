@@ -1,4 +1,3 @@
-import 'package:fiap_farms/ui/core/widgets/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:mobx/mobx.dart';
 
 import 'package:fiap_farms/ui/auth/login/stores/login_store.dart';
 import 'package:fiap_farms/dependencies/service_locator.dart';
+import 'package:fiap_farms/ui/core/widgets/widgets.dart';
 import 'package:fiap_farms/routing/routes.dart';
 
 class LoginScreen extends StatefulWidget {

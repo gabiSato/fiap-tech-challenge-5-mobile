@@ -5,6 +5,7 @@ import 'package:mobx/mobx.dart';
 
 import 'package:fiap_farms/ui/auth/create_user/stores/create_user_store.dart';
 import 'package:fiap_farms/dependencies/service_locator.dart';
+import 'package:fiap_farms/ui/core/widgets/widgets.dart';
 import 'package:fiap_farms/routing/routes.dart';
 
 class CreateUserScreen extends StatefulWidget {
@@ -22,9 +23,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     super.initState();
     reaction((_) => _store.errorMessage, (String? message) {
       if (message != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(message), backgroundColor: Colors.red),
-        );
+        showErrorSnackBar(context, message);
       }
     });
   }
@@ -47,49 +46,35 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  TextField(
+                  AppTextField(
                     onChanged: _store.setFullName,
-                    decoration: InputDecoration(
-                      labelText: 'Nome completo',
-                      errorText: _store.fullNameError,
-                    ),
+                    labelText: 'Nome completo',
+                    errorText: _store.fullNameError,
                   ),
                   const SizedBox(height: 24),
-                  TextField(
+                  AppTextField(
                     onChanged: _store.setFarmName,
-                    decoration: InputDecoration(
-                      labelText: 'Nome da fazenda',
-                      errorText: _store.farmNameError,
-                    ),
+                    labelText: 'Nome da fazenda',
+                    errorText: _store.farmNameError,
                   ),
                   const SizedBox(height: 24),
-                  TextField(
+                  AppTextField(
                     onChanged: _store.setEmail,
-                    decoration: InputDecoration(
-                      labelText: 'E-mail',
-                      errorText: _store.emailError,
-                    ),
+                    labelText: 'E-mail',
+                    errorText: _store.emailError,
                   ),
                   const SizedBox(height: 24),
-                  TextField(
+                  AppTextField(
                     onChanged: _store.setPassword,
-                    decoration: InputDecoration(
-                      labelText: 'Senha',
-                      errorText: _store.passwordError,
-                    ),
+                    labelText: 'Senha',
+                    errorText: _store.passwordError,
                     obscureText: true,
                   ),
                   const SizedBox(height: 32),
-                  FilledButton(
-                    onPressed: !_store.isLoading ? _store.createUser : null,
-                    child: _store.isLoading
-                        ? const CircularProgressIndicator(
-                            constraints: BoxConstraints.tightFor(
-                              width: 24,
-                              height: 24,
-                            ),
-                          )
-                        : const Text('Criar conta'),
+                  SubmitButton(
+                    onPressed: _store.createUser,
+                    text: 'Criar conta',
+                    isLoading: _store.isLoading,
                   ),
                 ],
               );

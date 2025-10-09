@@ -1,10 +1,10 @@
-import 'package:fiap_farms/ui/core/widgets/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiap_farms/ui/product/stores/product_form_store.dart';
 import 'package:fiap_farms/domain/entities/product_entity.dart';
 import 'package:fiap_farms/dependencies/service_locator.dart';
+import 'package:fiap_farms/ui/core/widgets/widgets.dart';
 
 class ProductForm extends StatefulWidget {
   final ProductEntity? product;
