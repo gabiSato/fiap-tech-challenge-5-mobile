@@ -11,22 +11,22 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final menuItems = [
       {
+        'icon': Icons.inventory_2_outlined,
+        'label': 'Produtos',
+        'route': Routes.products,
+      },
+      {
         'icon': Icons.agriculture_outlined,
-        'label': 'Plantações',
+        'label': 'Plantios',
         'route': Routes.productions,
       },
-      {'icon': Icons.sell_outlined, 'label': 'Vendas', 'route': '/sales'},
       {
         'icon': Icons.warehouse_outlined,
         'label': 'Estoque',
         'route': '/inventory',
       },
+      {'icon': Icons.sell_outlined, 'label': 'Vendas', 'route': '/sales'},
       {'icon': Icons.task_alt_outlined, 'label': 'Metas', 'route': '/goals'},
-      {
-        'icon': Icons.inventory_2_outlined,
-        'label': 'Produtos',
-        'route': Routes.products,
-      },
     ];
 
     return Scaffold(

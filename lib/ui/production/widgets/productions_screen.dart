@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'package:fiap_farms/ui/production/stores/productions_store.dart';
+import 'package:fiap_farms/ui/production/widgets/production_form.dart';
+import 'package:fiap_farms/utils/production_status_translation.dart';
+import 'package:fiap_farms/ui/core/widgets/full_screen_dialog.dart';
 import 'package:fiap_farms/domain/entities/production_status.dart';
 import 'package:fiap_farms/dependencies/service_locator.dart';
 import 'package:fiap_farms/routing/routes.dart';
@@ -29,7 +32,7 @@ class _ProductionsScreenState extends State<ProductionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Plantações'),
+        title: const Text('Plantios'),
         leading: IconButton(
           onPressed: () => context.go(Routes.home),
           icon: const Icon(Icons.arrow_back),
@@ -86,26 +89,25 @@ class _ProductionsScreenState extends State<ProductionsScreen> {
             itemCount: store.filteredProductions.length,
             itemBuilder: (context, index) {
               final production = store.filteredProductions[index];
-              final product = store.products[production.productId];
-              final numberFormat = NumberFormat.decimalPattern('pt_BR');
               final dateFormat = DateFormat('dd/MM/yyyy');
 
               String buildDateString() {
-                String start = dateFormat.format(production.startDate);
-                if (production.harvestDate != null) {
-                  return '$start - ${dateFormat.format(production.harvestDate!)}';
+                String start = dateFormat.format(production.plantingDate);
+                if (production.actualHarvestDate != null) {
+                  return '$start - ${dateFormat.format(production.actualHarvestDate!)}';
                 }
                 return start;
               }
 
               String buildQuantityString() {
+                final numberFormat = NumberFormat.decimalPattern('pt_BR');
                 String planted = numberFormat.format(
                   production.quantityPlanted,
                 );
                 if (production.quantityHarvested != null) {
-                  return '$planted / ${numberFormat.format(production.quantityHarvested!)} ${product?.unit.name}';
+                  return '$planted / ${numberFormat.format(production.quantityHarvested!)} ${production.unit}';
                 }
-                return '$planted ${product?.unit.name}';
+                return '$planted ${production.unit}';
               }
 
               return ListTile(
@@ -113,7 +115,7 @@ class _ProductionsScreenState extends State<ProductionsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      product?.name ?? '',
+                      production.productName,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -125,15 +127,11 @@ class _ProductionsScreenState extends State<ProductionsScreen> {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: ProductionStatus.values
-                            .firstWhere((e) => e.name == production.status)
-                            .color,
+                        color: production.status.color,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        ProductionStatus.values
-                            .firstWhere((e) => e.name == production.status)
-                            .displayName,
+                        production.status.displayName,
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -159,7 +157,14 @@ class _ProductionsScreenState extends State<ProductionsScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          await FullScreenDialog.show(
+            context,
+            title: 'Novo Plantio',
+            child: const ProductionForm(),
+          );
+          store.fetchProductions();
+        },
         child: const Icon(Icons.add),
       ),
     );

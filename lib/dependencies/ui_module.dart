@@ -6,7 +6,6 @@ import 'package:fiap_farms/domain/use_cases/product/create_product_usecase.dart'
 import 'package:fiap_farms/domain/use_cases/product/update_product_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/auth/get_current_user_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/product/get_products_usecase.dart';
-import 'package:fiap_farms/domain/use_cases/product/get_product_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/auth/logout_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/auth/login_usecase.dart';
 
@@ -35,7 +34,6 @@ void setupUiModule(GetIt sl) {
   sl.registerFactory(
     () => ProductionsStore(
       sl<GetCurrentUserUseCase>(),
-      sl<GetProductUseCase>(),
       sl<GetProductionsUseCase>(),
     ),
   );

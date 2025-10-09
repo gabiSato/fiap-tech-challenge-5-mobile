@@ -72,24 +72,6 @@ mixin _$ProductionsStore on _ProductionsStore, Store {
     });
   }
 
-  late final _$productsAtom = Atom(
-    name: '_ProductionsStore.products',
-    context: context,
-  );
-
-  @override
-  ObservableMap<String, ProductEntity> get products {
-    _$productsAtom.reportRead();
-    return super.products;
-  }
-
-  @override
-  set products(ObservableMap<String, ProductEntity> value) {
-    _$productsAtom.reportWrite(value, super.products, () {
-      super.products = value;
-    });
-  }
-
   late final _$selectedStatusAtom = Atom(
     name: '_ProductionsStore.selectedStatus',
     context: context,
@@ -118,16 +100,6 @@ mixin _$ProductionsStore on _ProductionsStore, Store {
     return _$fetchProductionsAsyncAction.run(() => super.fetchProductions());
   }
 
-  late final _$_fetchProductAsyncAction = AsyncAction(
-    '_ProductionsStore._fetchProduct',
-    context: context,
-  );
-
-  @override
-  Future<void> _fetchProduct(String productId) {
-    return _$_fetchProductAsyncAction.run(() => super._fetchProduct(productId));
-  }
-
   late final _$_ProductionsStoreActionController = ActionController(
     name: '_ProductionsStore',
     context: context,
@@ -151,7 +123,6 @@ mixin _$ProductionsStore on _ProductionsStore, Store {
 isLoading: ${isLoading},
 errorMessage: ${errorMessage},
 productions: ${productions},
-products: ${products},
 selectedStatus: ${selectedStatus},
 filteredProductions: ${filteredProductions}
     ''';

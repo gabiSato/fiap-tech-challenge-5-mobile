@@ -6,8 +6,8 @@ import 'package:fiap_farms/ui/product/widgets/product_list_screen.dart';
 import 'package:fiap_farms/ui/auth/login/widgets/login_screen.dart';
 import 'package:fiap_farms/ui/home/widgets/home_screen.dart';
 
-import 'package:fiap_farms/routing/routes.dart';
 import 'package:fiap_farms/routing/redirect_notifier.dart';
+import 'package:fiap_farms/routing/routes.dart';
 
 final RedirectNotifier redirectNotifier = RedirectNotifier();
 
