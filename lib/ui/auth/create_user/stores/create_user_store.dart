@@ -32,6 +32,9 @@ abstract class CreateUserStoreBase with Store {
   String email = '';
 
   @observable
+  String phone = '';
+
+  @observable
   String password = '';
 
   @observable
@@ -42,6 +45,9 @@ abstract class CreateUserStoreBase with Store {
 
   @observable
   String? emailError;
+
+  @observable
+  String? phoneError;
 
   @observable
   String? passwordError;
@@ -65,6 +71,11 @@ abstract class CreateUserStoreBase with Store {
           validateEmail(value);
         }
       }),
+      reaction((_) => phone, (value) {
+        if (phoneError != null) {
+          validatePhone(value);
+        }
+      }),
       reaction((_) => password, (value) {
         if (passwordError != null) {
           validatePassword(value);
@@ -81,6 +92,9 @@ abstract class CreateUserStoreBase with Store {
 
   @action
   void setEmail(String value) => email = value;
+
+  @action
+  void setPhone(String value) => phone = value;
 
   @action
   void setPassword(String value) => password = value;
@@ -115,6 +129,15 @@ abstract class CreateUserStoreBase with Store {
   }
 
   @action
+  void validatePhone(String value) {
+    if (value.isEmpty) {
+      phoneError = 'Telefone é obrigatório';
+    } else {
+      phoneError = null;
+    }
+  }
+
+  @action
   void validatePassword(String value) {
     if (value.isEmpty) {
       passwordError = 'Senha é obrigatória';
@@ -127,11 +150,13 @@ abstract class CreateUserStoreBase with Store {
     validateFullName(fullName);
     validateFarmName(farmName);
     validateEmail(email);
+    validatePhone(phone);
     validatePassword(password);
 
     return fullNameError == null &&
         farmNameError == null &&
         emailError == null &&
+        phoneError == null &&
         passwordError == null;
   }
 
@@ -145,6 +170,7 @@ abstract class CreateUserStoreBase with Store {
         farmName: farmName,
         name: fullName,
         email: email,
+        phone: phone,
       );
       final result = await _createCredentialUseCase.call(
         email: email,

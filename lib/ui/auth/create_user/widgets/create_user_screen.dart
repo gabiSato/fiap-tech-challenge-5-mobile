@@ -65,6 +65,12 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                   ),
                   const SizedBox(height: 24),
                   AppTextField(
+                    onChanged: _store.setPhone,
+                    labelText: 'Telefone',
+                    errorText: _store.phoneError,
+                  ),
+                  const SizedBox(height: 24),
+                  AppTextField(
                     onChanged: _store.setPassword,
                     labelText: 'Senha',
                     errorText: _store.passwordError,
