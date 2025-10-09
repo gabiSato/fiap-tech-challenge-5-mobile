@@ -161,7 +161,7 @@ class _ProductionsScreenState extends State<ProductionsScreen> {
           await FullScreenDialog.show(
             context,
             title: 'Novo Plantio',
-            child: const ProductionForm(),
+            child: ProductionForm(),
           );
           store.fetchProductions();
         },

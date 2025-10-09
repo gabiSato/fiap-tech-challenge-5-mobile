@@ -9,6 +9,7 @@ class AppCurrencyTextField extends StatelessWidget {
   final String? hintText;
   final String? errorText;
   final ValueChanged<String>? onChanged;
+  final bool readOnly;
 
   const AppCurrencyTextField({
     required this.labelText,
@@ -17,17 +18,18 @@ class AppCurrencyTextField extends StatelessWidget {
     this.hintText,
     this.errorText,
     this.onChanged,
+    this.readOnly = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       initialValue: initialValue,
+      readOnly: readOnly,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
         errorText: errorText,
-        prefixText: 'R\$ ',
       ),
       keyboardType: TextInputType.number,
       inputFormatters: [

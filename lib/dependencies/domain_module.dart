@@ -4,6 +4,7 @@ import 'package:fiap_farms/domain/repositories/production_repository.dart';
 import 'package:fiap_farms/domain/repositories/product_repository.dart';
 import 'package:fiap_farms/domain/repositories/auth_repository.dart';
 
+import 'package:fiap_farms/domain/use_cases/production/create_production_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/production/get_productions_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/product/create_product_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/auth/create_credential_usecase.dart';
@@ -25,5 +26,8 @@ void setupDomainModule(GetIt sl) {
   sl.registerLazySingleton(() => UpdateProductUseCase(sl<ProductRepository>()));
   sl.registerLazySingleton(
     () => GetProductionsUseCase(sl<ProductionRepository>()),
+  );
+  sl.registerLazySingleton(
+    () => CreateProductionUseCase(sl<ProductionRepository>()),
   );
 }

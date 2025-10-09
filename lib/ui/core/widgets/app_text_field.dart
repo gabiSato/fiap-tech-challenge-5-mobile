@@ -10,6 +10,7 @@ class AppTextField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onChanged;
   final TextInputType? keyboardType;
+  final Widget? suffix;
 
   const AppTextField({
     required this.labelText,
@@ -22,6 +23,7 @@ class AppTextField extends StatelessWidget {
     this.validator,
     this.onChanged,
     this.keyboardType,
+    this.suffix,
   });
 
   @override
@@ -35,6 +37,7 @@ class AppTextField extends StatelessWidget {
         hintText: hintText,
         errorText: errorText,
         icon: icon != null ? Icon(icon) : null,
+        suffix: suffix,
       ),
       validator: validator,
       onChanged: onChanged,
