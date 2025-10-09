@@ -47,8 +47,8 @@ class _ProductFormState extends State<ProductForm> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               AppTextField(
-                controller: TextEditingController(text: _store.name),
                 labelText: "Nome do produto",
+                initialValue: _store.name,
                 errorText: _store.nameError,
                 onChanged: _store.setName,
               ),
@@ -77,8 +77,8 @@ class _ProductFormState extends State<ProductForm> {
               ),
               const SizedBox(height: 16),
               AppCurrencyTextField(
-                controller: TextEditingController(text: _store.pricePerUnit),
                 labelText: "Preço por unidade",
+                initialValue: _store.pricePerUnit,
                 errorText: _store.pricePerUnitError,
                 onChanged: _store.setPricePerUnit,
               ),

@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:fiap_farms/utils/currency_formatter.dart';
 
 class AppCurrencyTextField extends StatelessWidget {
-  final TextEditingController? controller;
   final String labelText;
+  final String? initialValue;
   final String? hintText;
   final String? errorText;
   final ValueChanged<String>? onChanged;
@@ -13,7 +13,7 @@ class AppCurrencyTextField extends StatelessWidget {
   const AppCurrencyTextField({
     required this.labelText,
     super.key,
-    this.controller,
+    this.initialValue,
     this.hintText,
     this.errorText,
     this.onChanged,
@@ -22,7 +22,7 @@ class AppCurrencyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      initialValue: initialValue,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,

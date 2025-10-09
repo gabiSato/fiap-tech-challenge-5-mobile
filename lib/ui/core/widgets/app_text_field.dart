@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget {
-  final TextEditingController? controller;
   final String labelText;
+  final String? initialValue;
   final String? hintText;
   final String? errorText;
   final IconData? icon;
@@ -12,9 +12,9 @@ class AppTextField extends StatelessWidget {
   final TextInputType? keyboardType;
 
   const AppTextField({
-    super.key,
-    this.controller,
     required this.labelText,
+    super.key,
+    this.initialValue,
     this.hintText,
     this.errorText,
     this.icon,
@@ -27,7 +27,7 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      initialValue: initialValue,
       obscureText: obscureText,
       keyboardType: keyboardType,
       decoration: InputDecoration(
