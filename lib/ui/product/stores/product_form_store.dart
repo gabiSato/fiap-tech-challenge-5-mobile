@@ -6,6 +6,7 @@ import 'package:fiap_farms/domain/use_cases/product/create_product_usecase.dart'
 import 'package:fiap_farms/domain/use_cases/product/update_product_usecase.dart';
 import 'package:fiap_farms/domain/entities/product_entity.dart';
 import 'package:fiap_farms/domain/entities/user_entity.dart';
+import 'package:fiap_farms/utils/parse_currency.dart';
 
 part 'product_form_store.g.dart';
 
@@ -136,9 +137,10 @@ abstract class _ProductFormStore with Store {
 
   @action
   void validatePricePerUnit(String value) {
+    print(value);
     if (value.isEmpty) {
       pricePerUnitError = 'Preço por unidade é obrigatório';
-    } else if (double.tryParse(value) == null) {
+    } else if (parseCurrency(value) == null) {
       pricePerUnitError = 'Preço inválido';
     } else {
       pricePerUnitError = null;
@@ -191,7 +193,7 @@ abstract class _ProductFormStore with Store {
         name: name,
         category: category!,
         unit: unit!,
-        pricePerUnit: double.parse(pricePerUnit),
+        pricePerUnit: parseCurrency(pricePerUnit)!,
         currentStock: _product?.currentStock ?? 0.0,
       );
 
