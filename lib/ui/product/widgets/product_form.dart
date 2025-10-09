@@ -52,11 +52,12 @@ class _ProductFormState extends State<ProductForm> {
                 errorText: _store.nameError,
                 onChanged: _store.setName,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
               AppDropdown<ProductCategory>(
                 value: _store.category,
                 labelText: 'Categoria',
-                hintText: _store.categoryError,
+                hintText: 'Selecione uma categoria',
+                errorText: _store.categoryError,
                 items: ProductCategory.values.map((category) {
                   return DropdownMenuItem(
                     value: category,
@@ -65,17 +66,18 @@ class _ProductFormState extends State<ProductForm> {
                 }).toList(),
                 onChanged: _store.setCategory,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
               AppDropdown<ProductUnit>(
                 value: _store.unit,
                 labelText: 'Unidade',
-                hintText: _store.unitError,
+                hintText: 'Selecione uma unidade de medida',
+                errorText: _store.unitError,
                 items: ProductUnit.values.map((unit) {
                   return DropdownMenuItem(value: unit, child: Text(unit.name));
                 }).toList(),
                 onChanged: _store.setUnit,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
               AppCurrencyTextField(
                 labelText: "Preço por unidade",
                 initialValue: _store.pricePerUnit,

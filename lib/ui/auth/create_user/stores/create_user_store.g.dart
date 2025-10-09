@@ -99,6 +99,24 @@ mixin _$CreateUserStore on CreateUserStoreBase, Store {
     });
   }
 
+  late final _$phoneAtom = Atom(
+    name: 'CreateUserStoreBase.phone',
+    context: context,
+  );
+
+  @override
+  String get phone {
+    _$phoneAtom.reportRead();
+    return super.phone;
+  }
+
+  @override
+  set phone(String value) {
+    _$phoneAtom.reportWrite(value, super.phone, () {
+      super.phone = value;
+    });
+  }
+
   late final _$passwordAtom = Atom(
     name: 'CreateUserStoreBase.password',
     context: context,
@@ -168,6 +186,24 @@ mixin _$CreateUserStore on CreateUserStoreBase, Store {
   set emailError(String? value) {
     _$emailErrorAtom.reportWrite(value, super.emailError, () {
       super.emailError = value;
+    });
+  }
+
+  late final _$phoneErrorAtom = Atom(
+    name: 'CreateUserStoreBase.phoneError',
+    context: context,
+  );
+
+  @override
+  String? get phoneError {
+    _$phoneErrorAtom.reportRead();
+    return super.phoneError;
+  }
+
+  @override
+  set phoneError(String? value) {
+    _$phoneErrorAtom.reportWrite(value, super.phoneError, () {
+      super.phoneError = value;
     });
   }
 
@@ -241,6 +277,18 @@ mixin _$CreateUserStore on CreateUserStoreBase, Store {
   }
 
   @override
+  void setPhone(String value) {
+    final _$actionInfo = _$CreateUserStoreBaseActionController.startAction(
+      name: 'CreateUserStoreBase.setPhone',
+    );
+    try {
+      return super.setPhone(value);
+    } finally {
+      _$CreateUserStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setPassword(String value) {
     final _$actionInfo = _$CreateUserStoreBaseActionController.startAction(
       name: 'CreateUserStoreBase.setPassword',
@@ -289,6 +337,18 @@ mixin _$CreateUserStore on CreateUserStoreBase, Store {
   }
 
   @override
+  void validatePhone(String value) {
+    final _$actionInfo = _$CreateUserStoreBaseActionController.startAction(
+      name: 'CreateUserStoreBase.validatePhone',
+    );
+    try {
+      return super.validatePhone(value);
+    } finally {
+      _$CreateUserStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void validatePassword(String value) {
     final _$actionInfo = _$CreateUserStoreBaseActionController.startAction(
       name: 'CreateUserStoreBase.validatePassword',
@@ -308,10 +368,12 @@ errorMessage: ${errorMessage},
 fullName: ${fullName},
 farmName: ${farmName},
 email: ${email},
+phone: ${phone},
 password: ${password},
 fullNameError: ${fullNameError},
 farmNameError: ${farmNameError},
 emailError: ${emailError},
+phoneError: ${phoneError},
 passwordError: ${passwordError}
     ''';
   }
