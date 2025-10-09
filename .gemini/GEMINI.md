@@ -344,6 +344,12 @@ RULE "app-architecture-feature-based-organization" {
     [cite_start]OUTPUT: "* **Feature-based Organization:** For larger projects, organize code by feature, where each feature has its own presentation, domain, and data subfolders[cite: 65]. [cite_start]This improves navigability and scalability[cite: 65]."
 }
 
+RULE "app-architecture-clean-architecture-principles" {
+    PROMPT: "What principles should be followed for implementing Clean Architecture?"
+    BEHAVIOR: "Respond to the user with the given prompt."
+    OUTPUT: "* **Clean Architecture:** Implement a strict Clean Architecture to ensure separation of concerns, testability, and scalability. The application should be divided into three core layers: Domain, Data, and Presentation.\n\n    * **1. Domain Layer:** The innermost layer. Contains the core business logic (Use Cases) and business objects (Entities). This layer must be pure Dart, with no dependencies on Flutter or any external packages like HTTP clients.\n        * **Entities:** Represent core business models.\n        * **Use Cases:** Encapsulate specific application business rules.\n        * **Repositories (Abstract):** Define contracts (abstract classes) for data operations that the outer layers will implement.\n\n    * **2. Data Layer:** Responsible for all data retrieval and storage. It implements the repository contracts defined in the Domain layer.\n        * **Repositories (Implementation):** Concrete implementations of the repositories that fetch data from APIs, databases, etc.\n        * **Data Sources:** Classes that directly interact with a database or a network API.\n        * **Models:** Data Transfer Objects (DTOs) specific to the data sources (e.g., JSON parsing models).\n\n    * **3. Presentation Layer:** The outermost layer, responsible for the UI. This includes all Flutter widgets and state management logic (e.g., MobX Stores).\n\n    * **The Dependency Rule:** This is the most critical principle. Source code dependencies must **only** point inwards. \n        * The **Presentation Layer** depends on the **Domain Layer** (to call Use Cases).\n        * The **Data Layer** depends on the **Domain Layer** (to implement Repositories).\n        * The **Domain Layer** depends on **nothing**."
+}
+
 RULE "lint-rules-setup" {
     PROMPT: "How should lint rules be configured in a project?"
     BEHAVIOR: "Respond to the user with the given prompt."

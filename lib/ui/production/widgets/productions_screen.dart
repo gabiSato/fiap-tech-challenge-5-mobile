@@ -1,15 +1,18 @@
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
-import 'package:fiap_farms/ui/production/stores/productions_store.dart';
-import 'package:fiap_farms/ui/production/widgets/production_form.dart';
 import 'package:fiap_farms/utils/production_status_translation.dart';
-import 'package:fiap_farms/ui/core/widgets/full_screen_dialog.dart';
 import 'package:fiap_farms/domain/entities/production_status.dart';
+import 'package:fiap_farms/domain/entities/production_entity.dart';
 import 'package:fiap_farms/dependencies/service_locator.dart';
 import 'package:fiap_farms/routing/routes.dart';
+
+import 'package:fiap_farms/ui/production/widgets/production_list_item.dart';
+import 'package:fiap_farms/ui/production/widgets/production_details.dart';
+import 'package:fiap_farms/ui/production/stores/productions_store.dart';
+import 'package:fiap_farms/ui/production/widgets/production_form.dart';
+import 'package:fiap_farms/ui/core/widgets/full_screen_dialog.dart';
 
 class ProductionsScreen extends StatefulWidget {
   const ProductionsScreen({super.key});
@@ -26,6 +29,15 @@ class _ProductionsScreenState extends State<ProductionsScreen> {
     super.initState();
 
     store.fetchProductions();
+  }
+
+  void _showProductionDetails(ProductionEntity production) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return ProductionDetails(production: production);
+      },
+    );
   }
 
   @override
@@ -89,70 +101,9 @@ class _ProductionsScreenState extends State<ProductionsScreen> {
             itemCount: store.filteredProductions.length,
             itemBuilder: (context, index) {
               final production = store.filteredProductions[index];
-              final dateFormat = DateFormat('dd/MM/yyyy');
-
-              String buildDateString() {
-                String start = dateFormat.format(production.plantingDate);
-                String end = dateFormat.format(
-                  production.actualHarvestDate ??
-                      production.expectedHarvestDate,
-                );
-
-                return '$start - $end';
-              }
-
-              String buildQuantityString() {
-                final numberFormat = NumberFormat.decimalPattern('pt_BR');
-                String planted = numberFormat.format(
-                  production.quantityPlanted,
-                );
-                if (production.quantityHarvested != null) {
-                  return '$planted / ${numberFormat.format(production.quantityHarvested!)} ${production.unit}';
-                }
-                return '$planted ${production.unit}';
-              }
-
-              return ListTile(
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      production.productName,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: production.status.color,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        production.status.displayName,
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 4),
-                    Text(buildDateString()),
-                    const SizedBox(height: 4),
-                    Text(
-                      buildQuantityString(),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
+              return ProductionListItem(
+                production: production,
+                onTap: () => _showProductionDetails(production),
               );
             },
           );
