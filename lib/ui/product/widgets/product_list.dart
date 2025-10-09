@@ -2,6 +2,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiap_farms/ui/product/stores/product_list_store.dart';
+import 'package:fiap_farms/utils/product_enums_translation.dart';
 import 'package:fiap_farms/ui/product/widgets/product_form.dart';
 import 'package:fiap_farms/ui/core/widgets/widgets.dart';
 
@@ -46,7 +47,7 @@ class ProductList extends StatelessWidget {
             return ListTile(
               title: Text(product.name),
               subtitle: Text(
-                'Categoria: ${product.category.name} | Preço: R\$${product.pricePerUnit.toStringAsFixed(2)} / ${product.unit.name}',
+                'Categoria: ${product.category.displayName} | Preço: R\$${product.pricePerUnit.toStringAsFixed(2)} / ${product.unit.displayName}',
               ),
               trailing: IconButton(
                 onPressed: () async {

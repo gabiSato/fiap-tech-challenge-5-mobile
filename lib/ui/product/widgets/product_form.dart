@@ -2,6 +2,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiap_farms/ui/product/stores/product_form_store.dart';
+import 'package:fiap_farms/utils/product_enums_translation.dart';
 import 'package:fiap_farms/domain/entities/product_entity.dart';
 import 'package:fiap_farms/dependencies/service_locator.dart';
 import 'package:fiap_farms/ui/core/widgets/widgets.dart';
@@ -61,7 +62,7 @@ class _ProductFormState extends State<ProductForm> {
                 items: ProductCategory.values.map((category) {
                   return DropdownMenuItem(
                     value: category,
-                    child: Text(category.name),
+                    child: Text(category.displayName),
                   );
                 }).toList(),
                 onChanged: _store.setCategory,
@@ -73,7 +74,10 @@ class _ProductFormState extends State<ProductForm> {
                 hintText: 'Selecione uma unidade de medida',
                 errorText: _store.unitError,
                 items: ProductUnit.values.map((unit) {
-                  return DropdownMenuItem(value: unit, child: Text(unit.name));
+                  return DropdownMenuItem(
+                    value: unit,
+                    child: Text(unit.displayName),
+                  );
                 }).toList(),
                 onChanged: _store.setUnit,
               ),
