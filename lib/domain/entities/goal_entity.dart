@@ -1,25 +1,37 @@
+enum GoalType { sales, production }
+
+enum GoalPeriod { daily, weekly, monthly, quarterly, yearly }
+
 class GoalEntity {
   final String? id;
-  final String? productId;
   final String userId;
-  final String type;
-  final String description;
+  final GoalType type;
+  final String title;
+  final String? description;
   final double targetValue;
   final double currentValue;
+  final String unit;
+  final GoalPeriod period;
   final DateTime startDate;
   final DateTime endDate;
-  final String status;
+  final bool isCompleted;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   GoalEntity({
     required this.userId,
     required this.type,
-    required this.description,
+    required this.title,
     required this.targetValue,
     required this.currentValue,
+    required this.unit,
+    required this.period,
     required this.startDate,
     required this.endDate,
-    required this.status,
+    required this.isCompleted,
     this.id,
-    this.productId,
+    this.description,
+    this.createdAt,
+    this.updatedAt,
   });
 }
