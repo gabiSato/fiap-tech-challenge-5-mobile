@@ -44,8 +44,17 @@ class _ProductionFormState extends State<ProductionForm> {
               return const Center(child: CircularProgressIndicator());
             }
 
+            if (_store.isSaved) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                Navigator.of(context).pop();
+              });
+            }
+
             if (_store.errorMessage != null) {
-              return Center(child: Text(_store.errorMessage!));
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                showErrorSnackBar(context, _store.errorMessage!);
+                _store.errorMessage = null;
+              });
             }
 
             return Form(
