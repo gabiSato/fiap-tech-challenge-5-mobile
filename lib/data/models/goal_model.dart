@@ -18,11 +18,9 @@ class GoalModel {
   final DateTime? updatedAt;
 
   GoalModel({
-    this.id,
     required this.userId,
     required this.type,
     required this.title,
-    this.description,
     required this.targetValue,
     required this.currentValue,
     required this.unit,
@@ -30,6 +28,8 @@ class GoalModel {
     required this.startDate,
     required this.endDate,
     required this.isCompleted,
+    this.id,
+    this.description,
     this.createdAt,
     this.updatedAt,
   });
@@ -44,12 +44,18 @@ class GoalModel {
       targetValue: (map['targetValue'] ?? 0).toDouble(),
       currentValue: (map['currentValue'] ?? 0).toDouble(),
       unit: map['unit'] ?? '',
-      period: GoalPeriod.values.firstWhere((e) => e.toString() == map['period']),
+      period: GoalPeriod.values.firstWhere(
+        (e) => e.toString() == map['period'],
+      ),
       startDate: (map['startDate'] as Timestamp).toDate(),
       endDate: (map['endDate'] as Timestamp).toDate(),
       isCompleted: map['isCompleted'] ?? false,
-      createdAt: map['createdAt'] != null ? (map['createdAt'] as Timestamp).toDate() : null,
-      updatedAt: map['updatedAt'] != null ? (map['updatedAt'] as Timestamp).toDate() : null,
+      createdAt: map['createdAt'] != null
+          ? (map['createdAt'] as Timestamp).toDate()
+          : null,
+      updatedAt: map['updatedAt'] != null
+          ? (map['updatedAt'] as Timestamp).toDate()
+          : null,
     );
   }
 
@@ -66,8 +72,10 @@ class GoalModel {
       'startDate': Timestamp.fromDate(startDate),
       'endDate': Timestamp.fromDate(endDate),
       'isCompleted': isCompleted,
-      'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : null,
-      'updatedAt': updatedAt != null ? Timestamp.fromDate(updatedAt!) : null,
+      'createdAt': createdAt != null
+          ? Timestamp.fromDate(createdAt!)
+          : Timestamp.now(),
+      'updatedAt': Timestamp.now(),
     };
   }
 

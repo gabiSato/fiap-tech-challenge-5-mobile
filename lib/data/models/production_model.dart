@@ -137,8 +137,10 @@ class ProductionModel {
       'sowingMethod': sowingMethod?.name,
       'expectedYieldPerArea': expectedYieldPerArea,
       'notes': notes,
-      'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : null,
-      'updatedAt': updatedAt != null ? Timestamp.fromDate(updatedAt!) : null,
+      'createdAt': createdAt != null
+          ? Timestamp.fromDate(createdAt!)
+          : Timestamp.now(),
+      'updatedAt': Timestamp.now(),
     };
   }
 

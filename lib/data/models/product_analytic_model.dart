@@ -17,7 +17,6 @@ class ProductAnalyticModel {
   final DateTime? lastUpdated;
 
   ProductAnalyticModel({
-    this.id,
     required this.userId,
     required this.productId,
     required this.productName,
@@ -29,6 +28,7 @@ class ProductAnalyticModel {
     required this.averagePrice,
     required this.periodStartDate,
     required this.periodEndDate,
+    this.id,
     this.lastUpdated,
   });
 
@@ -46,7 +46,9 @@ class ProductAnalyticModel {
       averagePrice: (map['averagePrice'] ?? 0).toDouble(),
       periodStartDate: (map['periodStartDate'] as Timestamp).toDate(),
       periodEndDate: (map['periodEndDate'] as Timestamp).toDate(),
-      lastUpdated: map['lastUpdated'] != null ? (map['lastUpdated'] as Timestamp).toDate() : null,
+      lastUpdated: map['lastUpdated'] != null
+          ? (map['lastUpdated'] as Timestamp).toDate()
+          : null,
     );
   }
 
@@ -63,7 +65,9 @@ class ProductAnalyticModel {
       'averagePrice': averagePrice,
       'periodStartDate': Timestamp.fromDate(periodStartDate),
       'periodEndDate': Timestamp.fromDate(periodEndDate),
-      'lastUpdated': lastUpdated != null ? Timestamp.fromDate(lastUpdated!) : null,
+      'lastUpdated': lastUpdated != null
+          ? Timestamp.fromDate(lastUpdated!)
+          : null,
     };
   }
 

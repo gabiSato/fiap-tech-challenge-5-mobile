@@ -128,8 +128,10 @@ class SaleModel {
       'saleDate': Timestamp.fromDate(saleDate),
       'notes': notes,
       'invoiceNumber': invoiceNumber,
-      'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : null,
-      'updatedAt': updatedAt != null ? Timestamp.fromDate(updatedAt!) : null,
+      'createdAt': createdAt != null
+          ? Timestamp.fromDate(createdAt!)
+          : Timestamp.now(),
+      'updatedAt': Timestamp.now(),
     };
   }
 
