@@ -15,7 +15,8 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  late final WebViewController _controller;
+  late final WebViewController _controller = WebViewController();
+
   bool _isLoading = true;
   String? _errorMessage;
   final GetCurrentUserUseCase _getCurrentUserUseCase =
@@ -62,7 +63,7 @@ class _MapScreenState extends State<MapScreen> {
 
       final mapUrl = _baseUrl;
 
-      _controller = WebViewController()
+      _controller
         ..setJavaScriptMode(JavaScriptMode.unrestricted)
         ..setBackgroundColor(Colors.white)
         ..enableZoom(true)
@@ -101,7 +102,9 @@ class _MapScreenState extends State<MapScreen> {
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('Erro ao carregar recurso: ${error.description}'),
+                    content: Text(
+                      'Erro ao carregar recurso: ${error.description}',
+                    ),
                     backgroundColor: Colors.red,
                     duration: const Duration(seconds: 3),
                   ),
