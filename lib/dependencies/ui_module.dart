@@ -9,6 +9,9 @@ import 'package:fiap_farms/domain/use_cases/auth/get_current_user_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/product/get_products_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/auth/logout_usecase.dart';
 import 'package:fiap_farms/domain/use_cases/auth/login_usecase.dart';
+import 'package:fiap_farms/domain/use_cases/stock_batch/get_stock_batches_usecase.dart';
+import 'package:fiap_farms/domain/use_cases/sale/get_sales_usecase.dart';
+import 'package:fiap_farms/domain/use_cases/goal/get_goals_usecase.dart';
 
 import 'package:fiap_farms/ui/auth/create_user/stores/create_user_store.dart';
 import 'package:fiap_farms/ui/production/stores/production_form_store.dart';
@@ -17,6 +20,9 @@ import 'package:fiap_farms/ui/product/stores/product_list_store.dart';
 import 'package:fiap_farms/ui/product/stores/product_form_store.dart';
 import 'package:fiap_farms/ui/auth/logout/stores/logout_store.dart';
 import 'package:fiap_farms/ui/auth/login/stores/login_store.dart';
+import 'package:fiap_farms/ui/stock_batch/stores/stock_batch_list_store.dart';
+import 'package:fiap_farms/ui/sale/stores/sale_list_store.dart';
+import 'package:fiap_farms/ui/goal/stores/goal_list_store.dart';
 
 void setupUiModule(GetIt sl) {
   sl.registerFactory(() => LoginStore(sl<LoginUseCase>()));
@@ -44,6 +50,24 @@ void setupUiModule(GetIt sl) {
       sl<GetCurrentUserUseCase>(),
       sl<GetProductsUseCase>(),
       sl<CreateProductionUseCase>(),
+    ),
+  );
+  sl.registerFactory(
+    () => StockBatchListStore(
+      sl<GetCurrentUserUseCase>(),
+      sl<GetStockBatchesUseCase>(),
+    ),
+  );
+  sl.registerFactory(
+    () => SaleListStore(
+      sl<GetCurrentUserUseCase>(),
+      sl<GetSalesUseCase>(),
+    ),
+  );
+  sl.registerFactory(
+    () => GoalListStore(
+      sl<GetCurrentUserUseCase>(),
+      sl<GetGoalsUseCase>(),
     ),
   );
 }

@@ -23,10 +23,23 @@ class HomeScreen extends StatelessWidget {
       {
         'icon': Icons.warehouse_outlined,
         'label': 'Estoque',
-        'route': '/inventory',
+        'route': Routes.stockBatches,
       },
-      {'icon': Icons.sell_outlined, 'label': 'Vendas', 'route': '/sales'},
-      {'icon': Icons.task_alt_outlined, 'label': 'Metas', 'route': '/goals'},
+      {
+        'icon': Icons.sell_outlined,
+        'label': 'Vendas',
+        'route': Routes.sales,
+      },
+      {
+        'icon': Icons.task_alt_outlined,
+        'label': 'Metas',
+        'route': Routes.goals,
+      },
+      {
+        'icon': Icons.map_outlined,
+        'label': 'Mapa',
+        'route': Routes.map,
+      },
     ];
 
     return Scaffold(

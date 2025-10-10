@@ -91,12 +91,18 @@ class ProductionModel {
       otherCosts: map['otherCosts']?.toDouble(),
       areaPlanted: map['areaPlanted']?.toDouble(),
       areaUnit: map['areaUnit'] != null
-          ? AreaUnit.values.firstWhere((e) => e.name == map['areaUnit'])
+          ? AreaUnit.values.firstWhere(
+              (e) => e.name == map['areaUnit'],
+              orElse: () => AreaUnit.hectares,
+            )
           : null,
       plotLocation: map['plotLocation'],
       varietyName: map['varietyName'],
       sowingMethod: map['sowingMethod'] != null
-          ? SowingMethod.values.firstWhere((e) => e.name == map['sowingMethod'])
+          ? SowingMethod.values.firstWhere(
+              (e) => e.name == map['sowingMethod'],
+              orElse: () => SowingMethod.direct,
+            )
           : null,
       expectedYieldPerArea: map['expectedYieldPerArea']?.toDouble(),
       notes: map['notes'],
