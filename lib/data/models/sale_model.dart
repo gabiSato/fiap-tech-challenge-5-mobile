@@ -75,6 +75,7 @@ class SaleModel {
       paymentMethod: map['paymentMethod'] != null
           ? PaymentMethod.values.firstWhere(
               (e) => e.name == map['paymentMethod'],
+              orElse: () => PaymentMethod.cash,
             )
           : null,
       isPaid: map['isPaid'] ?? false,
