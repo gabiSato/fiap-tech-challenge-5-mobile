@@ -38,7 +38,10 @@ class GoalModel {
     return GoalModel(
       id: id,
       userId: map['userId'] ?? '',
-      type: GoalType.values.firstWhere((e) => e.toString() == map['type']),
+      type: GoalType.values.firstWhere(
+        (e) => e.toString() == map['type'],
+        orElse: () => GoalType.sales,
+      ),
       title: map['title'] ?? '',
       description: map['description'],
       targetValue: (map['targetValue'] ?? 0).toDouble(),
@@ -46,6 +49,7 @@ class GoalModel {
       unit: map['unit'] ?? '',
       period: GoalPeriod.values.firstWhere(
         (e) => e.toString() == map['period'],
+        orElse: () => GoalPeriod.monthly,
       ),
       startDate: (map['startDate'] as Timestamp).toDate(),
       endDate: (map['endDate'] as Timestamp).toDate(),
